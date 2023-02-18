@@ -65,7 +65,7 @@
        <span class="tooltip">Apply For U.A</span>
      </li>
      <li>
-       <a href="#">
+       <a href="allbook">
          <i class='bx bx-pie-chart-alt-2' ></i>
          <span class="links_name">Ebook</span>
        </a>

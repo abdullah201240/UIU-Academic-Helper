@@ -42,4 +42,11 @@ Route::get('studentaddcounsilling', [student_course_enroll::class, 'showallteach
 Route::get('show_teacher_profile/{id}', [student_course_enroll::class, 'showteacherprofile']);
 
 Route::get('studentprofile', [student_course_enroll::class, 'studentprofile']);
+Route::get('allbook', [student_course_enroll::class, 'showallbook']);
+Route::get('mybook', [student_course_enroll::class, 'mybook']);
 
+Route::post("mybook", [student_course_enroll::class, 'uploadbook']);
+Route::get("/download/{id}", [student_course_enroll::class, 'download']);
+//Route::post("mybook", [student_course_enroll::class, 'save']);
+
+Route::get("deletebook/{id}", [student_course_enroll::class, 'deletebook']);

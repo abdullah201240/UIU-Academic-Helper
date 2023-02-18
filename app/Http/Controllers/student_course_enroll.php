@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
+use Response;
 
-
+use Illuminate\Support\Facades\Storage;
 class student_course_enroll extends Controller
 {
     public function index()
@@ -179,6 +180,97 @@ class student_course_enroll extends Controller
 
 
     }
+    public function  showallbook()
+    {
 
+        $data = DB::select(" SELECT * FROM `book` ORDER BY(coursename)");
+
+
+        return view('allbook',['data' => $data]);
+
+    }
+
+    public function  mybook()
+    {
+        $id = Session::get('$sid');
+
+        $data = DB::select(" SELECT * FROM `book` where sid='$id' ORDER BY(coursename)");
+
+
+        return view('mybook',['data' => $data]);
+
+    }
+
+    public function  uploadbook(Request $req)
+    {
+        $topic=$req->topic;
+        $file=$req->file;
+        $filename=time().'.'.$file->getClientOriginalExtension();
+        $req->file->move('allbooks',$filename);
+
+        $id = Session::get('$sid');
+        $data = array('sid' => $id, "coursename" => $topic, "name" =>$filename);
+        DB::table('book')->insert($data);
+
+        $data = DB::select(" SELECT * FROM `book` where sid='$id' ORDER BY(coursename)");
+
+
+
+
+        return view('mybook',['data' => $data]);
+
+    }
+    public function  download($id)
+    {
+
+        echo$id;
+
+        // $path=storage_path("public/allbooks/{$file}");
+        // //return \Response::download($path);
+        // return $path;
+
+        return response()->download(public_path('allbooks/'.$id));
+
+    }
+    // public function save(Request $request){
+    //     $topic=$req->topic;
+    //     $file=$req->file;
+    //     $filename=time().'.'.$file->getClientOriginalExtension();
+    //     $req->file->move('allbooks',$filename);
+
+    //     $id = Session::get('$sid');
+    //     $data = array('sid' => $id, "coursename" => $topic, "name" =>$filename);
+    //     DB::table('book')->insert($data);
+
+    //     $data = DB::select(" SELECT * FROM `book` where sid='$id' ORDER BY(coursename)");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //     return view('mybook',['data' => $data]);
+
+
+
+    // }
+    public function deletebook($id){
+
+     DB::delete('DELETE FROM `book` WHERE id= ?', [$id]);
+
+        return redirect("mybook");
+
+    }
 
 }
