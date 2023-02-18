@@ -26,14 +26,14 @@
 
 body {
     min-height: 100vh;
-    background: url(images/html_table.jpg) center / cover;
+    background: url(images/cover_1.jpg) center / cover;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 main.table {
-    width: 70vw;
+    width: 68vw;
     /*height: 90vh;*/
     background-color: #fff5;
 
@@ -382,7 +382,7 @@ section .details span{
   background: #6990F2;
   border-radius: inherit;
 }
-/* .uploaded-area{
+ .uploaded-area{
   max-height: 232px;
   overflow-y: scroll;
 }
@@ -407,7 +407,7 @@ section .details span{
 }
 .uploaded-area i.fa-check{
   font-size: 16px;
-} */
+}
 .button1 {
   background-color: #95E1A1 ;
   color: white;
@@ -458,11 +458,17 @@ section .details span{
 
             </center>
             <br>
+            <br>
+            <br>
+
+
+      <div>
       <input class="file-input" type="file" name="file" hidden>
       <i class="fas fa-cloud-upload-alt"></i>
       <p>Browse File to Upload</p>
       <section class="progress-area"></section>
     <section class="uploaded-area"></section>
+      </div>
 
     <button type="submit" class="button button2">Upload</button>
     </form>

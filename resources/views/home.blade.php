@@ -26,17 +26,18 @@
 
 body {
     min-height: 100vh;
-    background: url(images/html_table.jpg) center / cover;
+    background: url(images/cover_1.jpg) center / cover;
+
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 main.table {
-    width: 82vw;
+    width: 68vw;
     /*height: 90vh;*/
     background-color: #fff5;
-
+    text-align: center;
     backdrop-filter: blur(7px);
     box-shadow: 0 .4rem .8rem #0005;
     border-radius: .8rem;
@@ -193,7 +194,7 @@ tbody tr.hide td img {
 
 .status.cancelled {
     background-color: #d893a3;
-    color: #b30021;
+    color: #b80f0fca;
 }
 
 .status.pending {
@@ -310,6 +311,7 @@ thead th.active,tbody td.active {
 
 
     </main>
+
 </body>
 
 <script>

@@ -1067,7 +1067,7 @@ Ext: 3300<br></p>
         </div>
         <div class="rights flex-row">
             <h4 class="text-gray">
-                Copyright ©2023 All rights reserved | made by Team</a>
+                Copyright ©2023 All rights reserved | made by Team Echo</a>
             </h4>
         </div>
         <div class="move-up">

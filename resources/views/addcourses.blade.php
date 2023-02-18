@@ -26,15 +26,15 @@
 
 body {
     min-height: 100vh;
-    background: url(images/html_table.jpg) center / cover;
+    background: url(images/cover_1.jpg) center / cover;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 main.table {
-    width: 82vw;
-    /*height: 90vh;*/
+    width: 68vw;
+    height: 80vh;
     background-color: #fff5;
 
     backdrop-filter: blur(7px);
@@ -290,7 +290,7 @@ thead th.active,tbody td.active {
                         <td>{{$da->Room}} </td>
                         <td>{{$da->ctimestart}} </td>
                         <td>{{$da->ctimeend}} </td>
-<td>                        <a href='/addcoursesapi/{{$da->id}}'><button type="button" class="btn btn-danger">Add Course</button></a> </td>
+<td>                        <a href='/addcoursesapi/{{$da->id}}'><button type="button" class="btn btn-success">Add Course</button></a> </td>
 
 
 

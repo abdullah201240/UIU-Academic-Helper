@@ -22,14 +22,14 @@
 
             body {
                 min-height: 100vh;
-                background: url(images/html_table.jpg) center / cover;
+                background: url(images/cover_1.jpg) center / cover;
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
 
             main.table {
-                width: 82vw;
+                width: 68vw;
                 /*height: 90vh;*/
                 background-color: #fff5;
 

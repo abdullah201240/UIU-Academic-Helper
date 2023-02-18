@@ -8,7 +8,20 @@
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   </head>
+
+   <style>
+    .footer{
+        position: fixed;
+        left:0;
+        bottom:0;
+        width:100%;
+        height: 70px;
+        text-align: center;
+        color: #e6e3e3;
+        background-color: #11101D;
+    }
+   </style>
+ </head>
 <body>
   <div class="sidebar">
     <div class="logo-details">
@@ -51,7 +64,7 @@
      </li>
      <li>
        <a href="#">
-         <i class='bx bx-chat' ></i>
+         <i class='bx bx-alarm' ></i>
          <span class="links_name">Short Courses</span>
        </a>
        <span class="tooltip">Short Courses</span>
@@ -88,21 +101,11 @@
 </div>
 
   <footer class="footer">
-
-
-
-
-
-
-
-
-
   <div class="legal">
-    <p>&copy; 2023 Team Echo . All rights reserved.</p>
+    <br>
+    <p>&copy; Copyright ©2023 All rights reserved | made by Team Echo</p>
 
-    <div class="legal__links">
-      <span>Made with <span class="heart">♥</span> remotely from Anywhere</span>
-    </div>
+
   </div>
 </footer>
 
