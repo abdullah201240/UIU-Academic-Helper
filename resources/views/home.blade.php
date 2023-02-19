@@ -285,7 +285,7 @@ thead th.active,tbody td.active {
                     <tr>
 
 
-                        <td>{{$da->cname}}  </td>
+                        <td><a href="participation/{{$da->id}}">{{$da->cname}} </a> </td>
                         <td>{{$da->cid}} </td>
                         <td>{{$da->section}} </td>
                         <td>{{$da->Room}} </td>

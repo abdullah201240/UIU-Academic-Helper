@@ -50,3 +50,16 @@ Route::get("/download/{id}", [student_course_enroll::class, 'download']);
 //Route::post("mybook", [student_course_enroll::class, 'save']);
 
 Route::get("deletebook/{id}", [student_course_enroll::class, 'deletebook']);
+
+Route::get("participation/{id}", [student_course_enroll::class, 'participations']);
+Route::get('showstudentprofile/{id}', [student_course_enroll::class, 'showprofile']);
+Route::get('formetresume', [student_course_enroll::class, 'formet']);
+Route::get('formetresumeapi', [student_course_enroll::class, 'formetapi']);
+Route::get('hideeducation/{id}', [student_course_enroll::class, 'hideeducation']);
+Route::get('hideproject/{id}', [student_course_enroll::class, 'hideproject']);
+Route::get('hideexprience/{id}', [student_course_enroll::class, 'hideexprience']);
+
+Route::get('hidecertificated/{id}', [student_course_enroll::class, 'hidecertificated']);
+
+Route::get('studentinfoedit', [student_course_enroll::class, 'studentinfoedit']);
+Route::post("studentinfoedit", [student_course_enroll::class, 'simage']);

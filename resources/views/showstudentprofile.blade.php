@@ -28,7 +28,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex flex-column align-items-center text-center">
-                                        <img src="images/{{ $da->image }}" alt="" class="rounded-circle"
+                                        <img src="{{ asset('images/' . $da->image) }}" alt="" class="rounded-circle"
                                             width="150">
                                         <div class="mt-3">
                                             <h4>{{ $da->name }}</h4>
@@ -86,11 +86,7 @@
                                     </li>
                                     <li>
                                         <br>
-                                        <div style="text-align: center;">
-                                            <a href="studentinfoedit"><button type="button"
-                                                    class="btn btn-primary">Edit</button></a>
-                                         <a href='formetresumeapi'><button type='button' class='btn btn-success'>Formet Resume</button></a>
-                                        </div>
+
 
                                     </li>
 
@@ -130,8 +126,7 @@
                                 </div>
                             </div>
                 @endforeach
-                <h1 style="text-align: center"> Education <a href="addeducation.php"><i style="height:40px;width:40px"
-                            class="fa fa-plus"></i></a> </h1>
+                <h1 style="text-align: center"> Education </h1>
                 <div>
                     @foreach ($data21 as $da21)
                         <div class="card mb-3">
@@ -184,11 +179,7 @@
 
 
                             </div>
-                            <div style="text-align:center">
 
-                                <a href=''><button type='button' class='btn btn-danger'>Delete</button></a>
-
-                            </div>
                             <p>----------------------------------------------------------------------------
                             </p>
                     @endforeach
@@ -197,8 +188,7 @@
                     <br>
 
 
-                    <h1 style="text-align: center"> All Projects <a href="addproject.php"><i
-                                style="height:40px;width:40px" class="fa fa-plus"></i></a> </h1>
+                    <h1 style="text-align: center"> All Projects </h1>
 
 
                     <div>
@@ -287,21 +277,15 @@
 
                                         <div class="col-sm-9 text-secondary">
                                             @foreach ($data25 as $da25)
-                                                <a href='images/{{ $da25->image }}'> <img
-                                                        src="images/{{ $da25->image }}" width="130"></a>
+                                                <a href='{{ asset('images/' . $da25->image) }}'> <img
+                                                        src="{{ asset('images/' . $da25->image) }}" width="130"></a>
                                             @endforeach
 
                                         </div>
                                     </div>
 
                                     <hr>
-                                    <div style="text-align: center">
-                                        <a href=''><button type='button'
-                                                class='btn btn-primary'>Edit</button></a>
 
-                                        <a href=''><button type='button'
-                                                class='btn btn-danger'>Delete</button></a>
-                                    </div>
                                 </div>
                             </div>
                         @endforeach
@@ -342,13 +326,10 @@
 
 
                     <br>
-                    <h1 style="text-align: center">Experience <a href="addexperience.php"><i
-                                style="height:40px;width:40px" class="fa fa-plus"></i></a> </h1>
+                    <h1 style="text-align: center">Experience </h1>
                     <br>
                     <div>
                         @foreach ($data26 as $da26)
-
-
                             <div class="card mb-3">
 
 
@@ -358,7 +339,7 @@
                                             <h6 class="mb-0">Title</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            {{ $da26->title}}
+                                            {{ $da26->title }}
 
 
 
@@ -370,7 +351,7 @@
                                             <h6 class="mb-0">Company Name</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            {{ $da26->companyname}}
+                                            {{ $da26->companyname }}
 
                                         </div>
                                     </div>
@@ -381,7 +362,7 @@
                                             <h6 class="mb-0"> Discription</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            {{ $da26->description}}
+                                            {{ $da26->description }}
 
                                         </div>
                                     </div>
@@ -429,11 +410,7 @@
 
 
                                     <hr>
-                                    <div style="text-align:center">
-                                        <a href='studentediteexp.php?id=$idw'><button type='button' class='btn btn-primary'>Edit</button></a>
-                                       <a href='studentdeleteexp.php?id=$idw'><button type='button' class='btn btn-danger'>Delete</button></a>
 
-                                    </div>
                                 </div>
                             </div>
 
@@ -449,70 +426,64 @@
             @endforeach
 
 
-            <h1 style="text-align: center"> ACHIEVEMENTS<a href="addachievements.php"><i style="height:40px;width:40px"
-                        class="fa fa-plus"></i></a> </h1>
+            <h1 style="text-align: center"> ACHIEVEMENTS </h1>
             <div>
                 @foreach ($data27 as $da27)
+                    <div class="card mb-3">
 
-                <div class="card mb-3">
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0"> Name</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ $da27->name }}
 
 
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0"> Name</h6>
+                                </div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                {{ $da27->name}}
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Discription</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{ $da27->dis }}
 
+                                </div>
+                            </div>
+                            <hr>
+
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Link</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <a href="  {{ $da27->link }}">Show credential </a>
+
+
+
+                                </div>
 
                             </div>
+
+
+
                         </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Discription</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                {{ $da27->dis}}
 
-                            </div>
-                        </div>
-                        <hr>
-
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Link</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                <a href="  {{ $da27->link}}">Show credential </a>
+                        <p>----------------------------------------------------------------------------
+                        </p>
+                @endforeach
 
 
-
-                            </div>
-
-                        </div>
-
-
-
-                    </div>
-                    <div style="text-align:center">
-
-                        <a href=''><button type='button' class='btn btn-danger'>Delete</button></a>"
-
-                    </div>
-                    <p>----------------------------------------------------------------------------
-                    </p>
-                    @endforeach
-
-
-                    <br>
-                </div>
+                <br>
             </div>
         </div>
         </div>
-            </div>
+        </div>
+        </div>
 
 
 
