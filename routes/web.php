@@ -63,3 +63,13 @@ Route::get('hidecertificated/{id}', [student_course_enroll::class, 'hidecertific
 
 Route::get('studentinfoedit', [student_course_enroll::class, 'studentinfoedit']);
 Route::post("studentinfoedit", [student_course_enroll::class, 'simage']);
+
+Route::get('print', [student_course_enroll::class, 'formet']);
+Route::post('adminlogin', [student_course_enroll::class, 'adminlogin']);
+Route::view("adminlogin", "adminlogin");
+Route::view("adminhome", "adminhome");
+
+Route::post("addstudent", [student_course_enroll::class, 'addstudent']);
+Route::view("addstudent", "addstudent");
+Route::post("addteacher", [student_course_enroll::class, 'addteacher']);
+Route::view("addteacher", "addteacher");

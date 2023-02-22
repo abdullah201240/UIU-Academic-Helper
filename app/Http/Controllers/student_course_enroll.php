@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
 use Response;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -354,6 +357,142 @@ class student_course_enroll extends Controller
         DB::update("UPDATE `student` SET `image`='$filename' WHERE  id=?", [$id]);
 
         return redirect("formetresume");
+
+    }
+    public function adminlogin(Request $req){
+        $user=$req->username;
+        $pass=$req->password;
+        if($user="Admin" && $pass="1234"){
+            //return redirect("formetresume");
+            return redirect("adminhome");
+        }
+
+        else{
+            return redirect("adminlogin");
+        }
+
+    }
+    public function  addstudent(Request $req)
+    {
+        $data = array("name" => $req->name, "id" =>$req->id, "department" => $req->department, "email" => $req->email, "number" => $req->number, "gender" => $req->gender, "password" => md5($req->password), "dob" => $req->birthdaytime,"image"=>"","cgpa"=>"","github"=>"","website"=>"","linkedin"=>"","address"=>"","intro"=>"","about"=>"");
+        DB::table('student')->insert($data);
+        try {
+            $mail = new PHPMailer(true);
+            //Server settings
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = 'uiu.ecats@gmail.com';                     //SMTP username
+            $mail->Password   = 'aeuzdymxmohxcdxq';                               //SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+            $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+            //Recipients
+            $mail->setFrom('uiu.ecats@gmail.com', 'UIU E-CATS Administrator (via eCATS)');
+            $mail->addAddress($req->email, $req->name);     //Add a recipient
+
+
+
+
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'UIU E-CATS: New user account';
+            $mail->Body    = "Hi ".$req->id."  ".$req->name."<br>
+
+            A new account has been created for you at <b>'UIU E-CATS'</b>
+            and you have been issued with a new temporary password.<br>
+
+            Your current login information is now:<br>
+            username:".$req->id."<br>
+            password: 1234<br>
+            (you will have to change your password
+            when you login for the first time)
+
+            To start using 'UIU E-CATS’,login at
+            http://lms.uiu.ac.bd/login/?lang=en
+
+            <br> In most mail programs, this should appear as a blue link
+            which you can just click on. If that doesn't work,
+            then cut and paste the address into the address
+            line at the top of your web browser window.<br>
+
+            Cheers from the 'UIU E-CATS’ administrator,
+
+            <br> UIU E-CATS Administrator
+            <br> uiu.ecats@gmail.com";
+
+
+            $mail->send();
+            echo 'Message has been sent';
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+
+
+        return redirect("addstudent");
+
+    }
+    public function  addteacher(Request $req)
+    {
+        $data = array("name" => $req->name, "id" =>$req->id, "department" => $req->department, "email" => $req->email, "number" => $req->number, "gender" => $req->gender, "password" => md5($req->password),"profession"=>$req->profession, "dob" => $req->birthdaytime,"room"=>"","pid"=>"6","image"=>"");
+        DB::table('teacher')->insert($data);
+        try {
+            $mail = new PHPMailer(true);
+            //Server settings
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = 'uiu.ecats@gmail.com';                     //SMTP username
+            $mail->Password   = 'aeuzdymxmohxcdxq';                               //SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+            $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+            //Recipients
+            $mail->setFrom('uiu.ecats@gmail.com', 'UIU E-CATS Administrator (via eCATS)');
+            $mail->addAddress($req->email, $req->name);     //Add a recipient
+
+
+
+
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'UIU E-CATS: New user account';
+            $mail->Body    = "Hi ".$req->id."  ".$req->name."<br>
+
+            A new account has been created for you at <b>'UIU E-CATS'</b>
+            and you have been issued with a new temporary password.<br>
+
+            Your current login information is now:<br>
+            username:".$req->id."<br>
+            password: 1234<br>
+            (you will have to change your password
+            when you login for the first time)
+
+            To start using 'UIU E-CATS’,login at
+            http://lms.uiu.ac.bd/login/?lang=en
+
+            <br> In most mail programs, this should appear as a blue link
+            which you can just click on. If that doesn't work,
+            then cut and paste the address into the address
+            line at the top of your web browser window.<br>
+
+            Cheers from the 'UIU E-CATS’ administrator,
+
+            <br> UIU E-CATS Administrator
+            <br> uiu.ecats@gmail.com";
+
+
+            $mail->send();
+            echo 'Message has been sent';
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+
+
+
+        return redirect("addteacher");
 
     }
 }
