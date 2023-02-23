@@ -495,4 +495,32 @@ class student_course_enroll extends Controller
         return redirect("addteacher");
 
     }
+
+
+    public function tlogin(Request $req)
+    {
+
+        $username = $req->username;
+        $pass = md5($req->password);
+
+
+
+        $users = DB::select("SELECT * FROM `teacher` WHERE id= '$username' AND password='$pass'");
+
+        foreach ($users as $user) {
+            echo $user->name;
+            Session::put('$tid', $user->id);
+            Session::put('$tname', $user->name);
+            Session::put('$timage', $user->image);
+
+
+            return redirect("teacherhome");
+
+
+        }
+        if ($users == false) {
+
+            return redirect("tlogin");
+        }
+    }
 }

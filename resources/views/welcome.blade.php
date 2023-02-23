@@ -677,7 +677,7 @@ you can use the generic selector below, but it's slower:
                         <a class="nav-link" href="#contact">Contact</a>
                     </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#">Faculty Login</a>
+                        <a class="nav-link" href="tlogin">Faculty Login</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="login">Student Login</a>
