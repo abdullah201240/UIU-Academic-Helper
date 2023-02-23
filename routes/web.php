@@ -73,6 +73,6 @@ Route::post("addstudent", [student_course_enroll::class, 'addstudent']);
 Route::view("addstudent", "addstudent");
 Route::post("addteacher", [student_course_enroll::class, 'addteacher']);
 Route::view("addteacher", "addteacher");
-Route::view("teacherhome", "teacherhome");
+Route::get('teacherhome', [student_course_enroll::class, 'thome']);
 Route::post("tlogin", [student_course_enroll::class, 'tlogin']);
 Route::view("tlogin", "tlogin");

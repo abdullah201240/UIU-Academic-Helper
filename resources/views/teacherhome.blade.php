@@ -263,82 +263,28 @@ body>.tbody>tr:hover{
 		<th>Class End Time</th>
 
 	</tr>
+    @foreach($users as $da1)
 
 	<tr>
 
-		<td>Software Engineering Laboratory</td>
+		<td>{{$da1->cname}}</td>
 
-		<td>CSE 4444</td>
+		<td>{{$da1->cid}}</td>
 
-		<td>A</td>
+		<td>{{$da1->section}}</td>
 
-		<td>CSE</td>
-		<td>404</td>
+		<td>{{$da1->department}} </td>
+		<td>{{$da1->Room}}</td>
 
-		<td>08:30</td>
-		<td>08:30</td>
-
-	</tr>
-	<tr>
-
-		<td>Software Engineering Laboratory</td>
-
-		<td>CSE 4444</td>
-
-		<td>A</td>
-
-		<td>CSE</td>
-		<td>404</td>
-
-		<td>08:30</td>
-		<td>08:30</td>
+		<td>{{$da1->ctimestart}}</td>
+		<td>{{$da1->ctimeend}} </td>
 
 	</tr>
-	<tr>
+    @endforeach
 
-		<td>Software Engineering Laboratory</td>
 
-		<td>CSE 4444</td>
 
-		<td>A</td>
 
-		<td>CSE</td>
-		<td>404</td>
-
-		<td>08:30</td>
-		<td>08:30</td>
-
-	</tr>
-	<tr>
-
-		<td>Software Engineering Laboratory</td>
-
-		<td>CSE 4444</td>
-
-		<td>A</td>
-
-		<td>CSE</td>
-		<td>404</td>
-
-		<td>08:30</td>
-		<td>08:30</td>
-
-	</tr>
-	<tr>
-
-		<td>Software Engineering Laboratory</td>
-
-		<td>CSE 4444</td>
-
-		<td>A</td>
-
-		<td>CSE</td>
-		<td>404</td>
-
-		<td>08:30</td>
-		<td>08:30</td>
-
-	</tr>
 
 
 
@@ -374,15 +320,16 @@ body>.tbody>tr:hover{
 
 
     <tbody class="tbody">
+        @foreach($data as $da)
     	<tr>
-    		<td>2022-12-31</td>
-    		<td>Saturday</td>
-    		<td>Abdullah Al Sakib</td>
-    		<td>011201240</td>
-    		<td>21;13</td>
-    		<td>21:16</td>
-    		<td>pending</td>
-    		<td>comment</td>
+    		<td>{{$da->date}}</td>
+    		<td>{{$da->day}}</td>
+    		<td>{{$da->sname}}</td>
+    		<td>{{$da->sid}}</td>
+    		<td>{{$da->start}}</td>
+    		<td>{{$da->end}}</td>
+    		<td>{{$da->states}}</td>
+    		<td>{{$da->comment}}</td>
     		<td>
     			<span class="action-btn">
     				<a href="#">Comment</a>
@@ -401,36 +348,17 @@ body>.tbody>tr:hover{
     		</td>
 
     	</tr>
+        @endforeach
 
-    	<tr>
-    		<td>2022-12-31</td>
-    		<td>Saturday</td>
-    		<td>Abdullah Al Sakib</td>
-    		<td>011201240</td>
-    		<td>21;13</td>
-    		<td>21:16</td>
-    		<td>pending</td>
-    		<td>comment</td>
-    		<td>
-    			<span class="action-btn">
-    				<a href="#">Comment</a>
-    			</span>
-    		</td>
-    		<td>
-    			<span class="action-btn1">
-    				<a href="#">Accepted</a>
-    			</span>
-    		</td>
-    		<td>
 
-    			<span class="action-btn2">
-    				<a href="#">Cancelled</a>
-    			</span>
-    		</td>
-
-    	</tr>
     </tbody>
 </table>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 </div>
 
 </div>

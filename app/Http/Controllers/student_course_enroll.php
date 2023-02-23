@@ -523,4 +523,11 @@ class student_course_enroll extends Controller
             return redirect("tlogin");
         }
     }
+    public function thome(){
+        $tid = Session::get('$tid');
+        $users = DB::select("Select * from course where tid='$tid'");
+        $data = DB::select("SELECT * FROM `bokking` WHERE tid='$tid' ORDER BY id DESC");
+        return view('teacherhome')->with(['data' => $data, 'users'=>$users]);
+
+    }
 }
