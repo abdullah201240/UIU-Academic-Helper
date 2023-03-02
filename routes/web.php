@@ -76,3 +76,24 @@ Route::view("addteacher", "addteacher");
 Route::get('teacherhome', [student_course_enroll::class, 'thome']);
 Route::post("tlogin", [student_course_enroll::class, 'tlogin']);
 Route::view("tlogin", "tlogin");
+Route::get('uahome', [student_course_enroll::class, 'ua']);
+Route::post('uahome', [student_course_enroll::class, 'uaapply']);
+Route::get('graderhome', [student_course_enroll::class, 'grader']);
+Route::post('graderhome', [student_course_enroll::class, 'graderapply']);
+
+Route::get('teacher_ua_list', [student_course_enroll::class, 'showua']);
+Route::get('teacher_request', [student_course_enroll::class, 'myua']);
+Route::get('uarej/{id}', [student_course_enroll::class, 'uarej']);
+Route::get('uaasp/{id}', [student_course_enroll::class, 'uaasp']);
+Route::get('teacherua/{id}/{cid}', [student_course_enroll::class, 'ualist']);
+Route::get('uaadd/{sid}/{sname}/{cid}/{cname}/{section}/{tid}', [student_course_enroll::class, 'addua']);
+Route::get('deleteua/{id}', [student_course_enroll::class, 'deleteua']);
+Route::get('teacher_grader_list', [student_course_enroll::class, 'showgrader']);
+Route::get('teachergrader/{id}/{cid}', [student_course_enroll::class, 'graderlist']);
+Route::get('graderadd/{sid}/{sname}/{cid}/{cname}/{section}/{tid}', [student_course_enroll::class, 'addgrader']);
+
+Route::get('publicgrader', [student_course_enroll::class, 'publicgrader']);
+Route::get('publicua', [student_course_enroll::class, 'publicua']);
+
+
+

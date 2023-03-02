@@ -19,8 +19,6 @@ class student_course_enroll extends Controller
         $id = Session::get('$sid');
         $data = DB::select("SELECT * FROM `take_courses` WHERE sid='$id'");
         return view('home', ['data' => $data]);
-
-
     }
 
     public function destroy($id)
@@ -54,11 +52,10 @@ class student_course_enroll extends Controller
             Session::put('$sid', $user->id);
             Session::put('$sname', $user->name);
             Session::put('$simage', $user->image);
+            Session::put('$scgpa', $user->cgpa);
             $data = DB::select("SELECT * FROM `take_courses` WHERE sid='$user->id'");
 
             return redirect("home");
-
-
         }
         if ($users == false) {
 
@@ -70,8 +67,6 @@ class student_course_enroll extends Controller
 
         $data = DB::select("SELECT * FROM `course`");
         return view('addcourses', ['data' => $data]);
-
-
     }
 
     public function searchcourses(Request $req)
@@ -108,10 +103,6 @@ class student_course_enroll extends Controller
 
 
         return redirect("home");
-
-
-
-
     }
     public function slogout()
 
@@ -318,38 +309,37 @@ class student_course_enroll extends Controller
 
         return redirect("formetresume");
     }
-    public function hideproject($id) {
+    public function hideproject($id)
+    {
         DB::update("UPDATE `project` SET `hide`='1' WHERE  project_id=?", [$id]);
         //DB::table('education') ->where('id', '$id') ->limit(1) ->update( [ 'hide' =>'1' ]);
 
         return redirect("formetresume");
-
-
     }
-    public function hideexprience($id){
+    public function hideexprience($id)
+    {
 
         DB::update("UPDATE `experience` SET `hide`='1' WHERE  id=?", [$id]);
         //DB::table('education') ->where('id', '$id') ->limit(1) ->update( [ 'hide' =>'1' ]);
 
         return redirect("formetresume");
-
     }
-    public function hidecertificated($id) {
+    public function hidecertificated($id)
+    {
         DB::update("UPDATE `achievements` SET `hide`='1' WHERE  id=?", [$id]);
         //DB::table('education') ->where('id', '$id') ->limit(1) ->update( [ 'hide' =>'1' ]);
 
         return redirect("formetresume");
-
-
     }
-    public function studentinfoedit(){
+    public function studentinfoedit()
+    {
 
         $id = Session::get('$sid');
         $data = DB::select("SELECT * FROM `student` WHERE id= '$id'");
         return view('studentinfoedit', ['data' => $data]);
-
     }
-    public function simage(Request $req){
+    public function simage(Request $req)
+    {
         $id = Session::get('$sid');
         $file = $req->file;
         $filename = time() . '.' . $file->getClientOriginalExtension();
@@ -357,24 +347,21 @@ class student_course_enroll extends Controller
         DB::update("UPDATE `student` SET `image`='$filename' WHERE  id=?", [$id]);
 
         return redirect("formetresume");
-
     }
-    public function adminlogin(Request $req){
-        $user=$req->username;
-        $pass=$req->password;
-        if($user="Admin" && $pass="1234"){
+    public function adminlogin(Request $req)
+    {
+        $user = $req->username;
+        $pass = $req->password;
+        if ($user = "Admin" && $pass = "1234") {
             //return redirect("formetresume");
             return redirect("adminhome");
-        }
-
-        else{
+        } else {
             return redirect("adminlogin");
         }
-
     }
     public function  addstudent(Request $req)
     {
-        $data = array("name" => $req->name, "id" =>$req->id, "department" => $req->department, "email" => $req->email, "number" => $req->number, "gender" => $req->gender, "password" => md5($req->password), "dob" => $req->birthdaytime,"image"=>"","cgpa"=>"","github"=>"","website"=>"","linkedin"=>"","address"=>"","intro"=>"","about"=>"");
+        $data = array("name" => $req->name, "id" => $req->id, "department" => $req->department, "email" => $req->email, "number" => $req->number, "gender" => $req->gender, "password" => md5($req->password), "dob" => $req->birthdaytime, "image" => "", "cgpa" => "", "github" => "", "website" => "", "linkedin" => "", "address" => "", "intro" => "", "about" => "");
         DB::table('student')->insert($data);
         try {
             $mail = new PHPMailer(true);
@@ -398,13 +385,13 @@ class student_course_enroll extends Controller
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->Subject = 'UIU E-CATS: New user account';
-            $mail->Body    = "Hi ".$req->id."  ".$req->name."<br>
+            $mail->Body    = "Hi " . $req->id . "  " . $req->name . "<br>
 
             A new account has been created for you at <b>'UIU E-CATS'</b>
             and you have been issued with a new temporary password.<br>
 
             Your current login information is now:<br>
-            username:".$req->id."<br>
+            username:" . $req->id . "<br>
             password: 1234<br>
             (you will have to change your password
             when you login for the first time)
@@ -431,11 +418,10 @@ class student_course_enroll extends Controller
 
 
         return redirect("addstudent");
-
     }
     public function  addteacher(Request $req)
     {
-        $data = array("name" => $req->name, "id" =>$req->id, "department" => $req->department, "email" => $req->email, "number" => $req->number, "gender" => $req->gender, "password" => md5($req->password),"profession"=>$req->profession, "dob" => $req->birthdaytime,"room"=>"","pid"=>"6","image"=>"");
+        $data = array("name" => $req->name, "id" => $req->id, "department" => $req->department, "email" => $req->email, "number" => $req->number, "gender" => $req->gender, "password" => md5($req->password), "profession" => $req->profession, "dob" => $req->birthdaytime, "room" => "", "pid" => "6", "image" => "");
         DB::table('teacher')->insert($data);
         try {
             $mail = new PHPMailer(true);
@@ -459,13 +445,13 @@ class student_course_enroll extends Controller
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->Subject = 'UIU E-CATS: New user account';
-            $mail->Body    = "Hi ".$req->id."  ".$req->name."<br>
+            $mail->Body    = "Hi " . $req->id . "  " . $req->name . "<br>
 
             A new account has been created for you at <b>'UIU E-CATS'</b>
             and you have been issued with a new temporary password.<br>
 
             Your current login information is now:<br>
-            username:".$req->id."<br>
+            username:" . $req->id . "<br>
             password: 1234<br>
             (you will have to change your password
             when you login for the first time)
@@ -493,7 +479,6 @@ class student_course_enroll extends Controller
 
 
         return redirect("addteacher");
-
     }
 
 
@@ -515,19 +500,302 @@ class student_course_enroll extends Controller
 
 
             return redirect("teacherhome");
-
-
         }
         if ($users == false) {
 
             return redirect("tlogin");
         }
     }
-    public function thome(){
+    public function thome()
+    {
         $tid = Session::get('$tid');
         $users = DB::select("Select * from course where tid='$tid'");
         $data = DB::select("SELECT * FROM `bokking` WHERE tid='$tid' ORDER BY id DESC");
-        return view('teacherhome')->with(['data' => $data, 'users'=>$users]);
+        return view('teacherhome')->with(['data' => $data, 'users' => $users]);
+    }
+    public function ua()
+    {
+        $id = Session::get('$sid');
+        $data = DB::select("SELECT * FROM `course` WHERE Occupied > '34' AND credit='1'");
 
+        $data1 = DB::select("SELECT * FROM `apply` WHERE sid='$id' AND credit='1'");
+        return view('uahome')->with(['data' => $data, 'data1' => $data1]);
+    }
+
+    public function uaapply(Request $req)
+    {
+        $sid = Session::get('$sid');
+        $sname = Session::get('$sname');
+        $cgpa = Session::get('$scgpa');
+
+
+        $data2 = DB::select("SELECT * FROM `course` WHERE id='$req->cn'");
+        foreach ($data2 as $da2) {
+            $cname = $da2->cname;
+            $tname = $da2->tname;
+            $tid = $da2->tid;
+            $section = $da2->section;
+            $start = $da2->ctimestart;
+            $end = $da2->ctimeend;
+            $cid = $da2->cid;
+            $credit = $da2->credit;
+        }
+        $data20 = array('cname' => $cname, "cid" => $cid, "sname" => $sname, "tname" => $tname, "tid" => $tid, "sid" => $sid, "section" => $section, "ctimestart" => $start, "ctimeend" => $end, 'cgpa' => $cgpa, 'credit' => $credit);
+        DB::table('apply')->insert($data20);
+
+        $data = DB::select("SELECT * FROM `course` WHERE Occupied > '34' AND credit='1'");
+
+        $data1 = DB::select("SELECT * FROM `apply` WHERE sid='$sid' AND credit='1'");
+        return view('uahome')->with(['data' => $data, 'data1' => $data1]);
+    }
+
+
+    public function grader()
+    {
+        $id = Session::get('$sid');
+        $data = DB::select("SELECT * FROM `course` WHERE Occupied > '34' AND credit='3'");
+
+        $data1 = DB::select("SELECT * FROM `apply` WHERE sid='$id'AND credit='3'");
+        return view('graderhome')->with(['data' => $data, 'data1' => $data1]);
+    }
+
+    public function graderapply(Request $req)
+    {
+        $sid = Session::get('$sid');
+        $sname = Session::get('$sname');
+        $cgpa = Session::get('$scgpa');
+
+
+        $data2 = DB::select("SELECT * FROM `course` WHERE id='$req->cn'");
+        foreach ($data2 as $da2) {
+            $cname = $da2->cname;
+            $tname = $da2->tname;
+            $tid = $da2->tid;
+            $section = $da2->section;
+            $start = $da2->ctimestart;
+            $end = $da2->ctimeend;
+            $cid = $da2->cid;
+            $credit = $da2->credit;
+        }
+        $data21 = DB::select("SELECT * FROM `result` WHERE Student_Id='$sid' AND Course_Id='$cid'");
+        foreach ($data21 as $row) {
+            if ($row->result == 'A') {
+                $data20 = array('cname' => $cname, "cid" => $cid, "sname" => $sname, "tname" => $tname, "tid" => $tid, "sid" => $sid, "section" => $section, "ctimestart" => $start, "ctimeend" => $end, 'cgpa' => $cgpa, 'credit' => $credit);
+                DB::table('apply')->insert($data20);
+
+                $data = DB::select("SELECT * FROM `course` WHERE Occupied > '34' AND credit='3'");
+
+                $data1 = DB::select("SELECT * FROM `apply` WHERE sid='$sid' AND credit='3'");
+                return view('graderhome')->with(['data' => $data, 'data1' => $data1]);
+            } else {
+                $data = DB::select("SELECT * FROM `course` WHERE Occupied > '34' AND credit='3'");
+
+                $data1 = DB::select("SELECT * FROM `apply` WHERE sid='$sid' AND credit='3'");
+                return view('graderhome')->with(['data' => $data, 'data1' => $data1]);
+            }
+        }
+        $data = DB::select("SELECT * FROM `course` WHERE Occupied > '34' AND credit='3'");
+
+                $data1 = DB::select("SELECT * FROM `apply` WHERE sid='$sid' AND credit='3'");
+                return view('graderhome')->with(['data' => $data, 'data1' => $data1]);
+    }
+    public function showua()
+    {
+        $data = DB::select("SELECT * FROM `course` WHERE Occupied > '34' AND credit='1'");
+
+        $data100 = DB::select("SELECT * FROM `ta` where credit='1'");
+        return view('teacher_ua_list')->with(['data' => $data, 'data100' => $data100]);
+    }
+    public function myua()
+    {
+        $tid = Session::get('$tid');
+
+        $data = DB::select("SELECT * FROM `ta` WHERE tid='$tid'");
+        return view('teacher_request')->with(['data' => $data]);
+    }
+    public function uarej($id)
+    {
+
+        $data = DB::UPDATE("UPDATE `ta` SET `status`='Reject' WHERE id='$id'");
+        return redirect('teacher_request');
+    }
+    public function uaasp($id)
+    {
+
+        $data = DB::UPDATE("UPDATE `ta` SET `status`='Accept' WHERE id='$id'");
+        return redirect('teacher_request');
+    }
+    public function ualist($id, $cid)
+    {
+
+        $data = DB::select("SELECT *
+    FROM apply
+    INNER JOIN student ON apply.sid=student.id WHERE apply.cid='$cid' and section='$id' ORDER BY(student.cgpa) DESC");
+        return view('teacherua')->with(['data' => $data]);
+    }
+    public function addua($sid, $sname, $cid, $cname, $section, $tid)
+    {
+
+        $data = array('sid' => $sid, "cid" => $cid, "sname" => $sname, "tid" => $tid,  "cname" => $cname, "section" => $section, "status" => "Pending", "credit" => "1");
+        DB::table('ta')->insert($data);
+        return redirect('teacher_ua_list');
+    }
+    public function deleteua($id)
+    {
+        DB::delete('DELETE FROM `ta` WHERE id = ?', [$id]);
+        return redirect('teacher_ua_list');
+    }
+    public function showgrader()
+    {
+        $data = DB::select("SELECT * FROM `course` WHERE Occupied > '34' AND credit='3'");
+
+        $data100 = DB::select("SELECT * FROM `ta` where credit='3'");
+        return view('teacher_grader_list')->with(['data' => $data, 'data100' => $data100]);
+    }
+    public function graderlist($id, $cid)
+    {
+
+        $data = DB::select("SELECT *
+    FROM apply
+    INNER JOIN student ON apply.sid=student.id WHERE apply.cid='$cid' and section='$id' ORDER BY(student.cgpa) DESC");
+        return view('teachergrader')->with(['data' => $data]);
+    }
+    public function addgrader($sid, $sname, $cid, $cname, $section, $tid)
+    {
+
+
+        $data = array('sid' => $sid, "cid" => $cid, "sname" => $sname, "tid" => $tid,  "cname" => $cname, "section" => $section, "status" => "Pending", "credit" => "3");
+        DB::table('ta')->insert($data);
+        return redirect('teacher_grader_list');
+    }
+    public function publicgrader()
+    {
+
+
+
+        $data = DB::select("SELECT *
+     FROM ta
+     INNER JOIN student ON ta.sid=student.id WHERE ta.credit='3' and ta.status='Accept'");
+        foreach ($data as $row) {
+            try {
+                $mail = new PHPMailer(true);
+                //Server settings
+                $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+                $mail->isSMTP();                                            //Send using SMTP
+                $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                $mail->Username   = 'uiu.ecats@gmail.com';                     //SMTP username
+                $mail->Password   = 'aeuzdymxmohxcdxq';                               //SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+                $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+                //Recipients
+                $mail->setFrom('uiu.ecats@gmail.com', 'UIU E-CATS Administrator (via eCATS)');
+                $mail->addAddress($row->email, $row->name);     //Add a recipient
+
+
+
+
+                //Content
+                $mail->isHTML(true);                                  //Set email format to HTML
+                $mail->Subject = 'UIU E-CATS: New user account';
+                $mail->Body    = "Hi " . $row->id . "  " . $row->name . "<br>
+
+            A new account has been created for you at <b>'UIU E-CATS'</b>
+            and you have been issued with a new temporary password.<br>
+
+            Your current login information is now:<br>
+            username:" . $row->id . "<br>
+            password: 1234<br>
+            (you will have to change your password
+            when you login for the first time)
+
+            To start using 'UIU E-CATS’,login at
+            http://lms.uiu.ac.bd/login/?lang=en
+
+            <br> In most mail programs, this should appear as a blue link
+            which you can just click on. If that doesn't work,
+            then cut and paste the address into the address
+            line at the top of your web browser window.<br>
+
+            Cheers from the 'UIU E-CATS’ administrator,
+
+            <br> UIU E-CATS Administrator
+            <br> uiu.ecats@gmail.com";
+
+
+                $mail->send();
+                echo 'Message has been sent';
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
+            return redirect('teacher_grader_list');
+        }
+    }
+
+    public function publicua()
+    {
+
+
+
+        $data = DB::select("SELECT *
+    FROM ta
+    INNER JOIN student ON ta.sid=student.id WHERE ta.credit='1' and ta.status='Accept'");
+        foreach ($data as $row) {
+            try {
+                $mail = new PHPMailer(true);
+                //Server settings
+                $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+                $mail->isSMTP();                                            //Send using SMTP
+                $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                $mail->Username   = 'uiu.ecats@gmail.com';                     //SMTP username
+                $mail->Password   = 'aeuzdymxmohxcdxq';                               //SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+                $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+                //Recipients
+                $mail->setFrom('uiu.ecats@gmail.com', 'UIU E-CATS Administrator (via eCATS)');
+                $mail->addAddress($row->email, $row->name);     //Add a recipient
+
+
+
+
+                //Content
+                $mail->isHTML(true);                                  //Set email format to HTML
+                $mail->Subject = 'Selected as a UA';
+                $mail->Body    = "
+           Dear " . "$row->name" . ",<br>
+
+Congratulations! You have been selected as an undergraduate assistant for the following course.
+
+Course Code:" . "$row->cid" . "<br>
+Course Title:" . " $row->cname " . "<br>
+Section:" . " $row->section " . "<br>
+
+
+Student ID: " . " $row->sid " . "<br>
+Student Name: " . " $row->name " . "<br>
+Contact No:" . " $row->number " . "<br>
+
+Please be present in due time and feel free to contact us if you have any further query.<br>
+
+Regards,<br>
+
+Farhan Anan Himu<br>
+Lecturer<br>
+Department of Computer Science & Engineering<br>
+United International University<br>
+
+           ";
+
+
+                $mail->send();
+                echo 'Message has been sent';
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
+            return redirect('teacher_grader_list');
+        }
     }
 }

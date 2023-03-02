@@ -50,36 +50,40 @@
 
       <li>
        <a href="/counsilling">
-         <i class='bx bx-user' ></i>
+         <i class='bx bx-alarm-add' ></i>
          <span class="links_name">Counselling</span>
        </a>
        <span class="tooltip">Counselling</span>
      </li>
      <li>
+
        <a href="#">
-         <i class='bx bx-user' ></i>
-         <span class="links_name">Participation</span>
-       </a>
-       <span class="tooltip">Participation</span>
-     </li>
-     <li>
-       <a href="#">
-         <i class='bx bx-alarm' ></i>
+         <i class='bx bx-book-bookmark' ></i>
          <span class="links_name">Short Courses</span>
        </a>
        <span class="tooltip">Short Courses</span>
      </li>
 
      <li>
-       <a href="#">
-         <i class='bx bx-chat' ></i>
+       <a href="uahome">
+
+
          <span class="links_name">Apply For U.A</span>
        </a>
        <span class="tooltip">Apply For U.A</span>
      </li>
      <li>
+        <li>
+            <a href="graderhome">
+
+
+              <span class="links_name">Apply For Grader</span>
+            </a>
+            <span class="tooltip">Apply For Grader</span>
+          </li>
+          <li>
        <a href="allbook">
-         <i class='bx bx-pie-chart-alt-2' ></i>
+        <i class='bx  bx-book-reader' ></i>
          <span class="links_name">Ebook</span>
        </a>
        <span class="tooltip">Ebook</span>

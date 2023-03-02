@@ -28,7 +28,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex flex-column align-items-center text-center">
-                                        <img src="images/{{ $da->image }}" alt="" class="rounded-circle"
+                                        <img src="images/{{$da->image}}" alt="" class="rounded-circle"
                                             width="150">
                                         <div class="mt-3">
                                             <h4>{{ $da->name }}</h4>
@@ -130,8 +130,8 @@
                                 </div>
                             </div>
                 @endforeach
-                <h1 style="text-align: center"> Education <a href="addeducation.php"><i style="height:40px;width:40px"
-                            class="fa fa-plus"></i></a> </h1>
+
+                <h1 style="text-align: center"> Education <a href="addeducation.php"><a href=""> <i class='bx bx-plus-medical' ></i></a> </h1>
                 <div>
                     @foreach ($data21 as $da21)
                         <div class="card mb-3">
@@ -197,8 +197,7 @@
                     <br>
 
 
-                    <h1 style="text-align: center"> All Projects <a href="addproject.php"><i
-                                style="height:40px;width:40px" class="fa fa-plus"></i></a> </h1>
+                    <h1 style="text-align: center"> All Projects <a href="http://"><i class='bx bx-plus-medical' ></i></a> </h1>
 
 
                     <div>
@@ -342,8 +341,7 @@
 
 
                     <br>
-                    <h1 style="text-align: center">Experience <a href="addexperience.php"><i
-                                style="height:40px;width:40px" class="fa fa-plus"></i></a> </h1>
+                    <h1 style="text-align: center">Experience <a href="http://"> <i class='bx bx-plus-medical' ></i></a> </h1>
                     <br>
                     <div>
                         @foreach ($data26 as $da26)
@@ -449,8 +447,7 @@
             @endforeach
 
 
-            <h1 style="text-align: center"> ACHIEVEMENTS<a href="addachievements.php"><i style="height:40px;width:40px"
-                        class="fa fa-plus"></i></a> </h1>
+            <h1 style="text-align: center"> ACHIEVEMENTS<a href="http://"> <i class='bx bx-plus-medical' ></i></a> </h1>
             <div>
                 @foreach ($data27 as $da27)
 

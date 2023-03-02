@@ -1,7 +1,5 @@
-
 @extends('tlayout')
 @section('content')
-
 <!DOCTYPE html>
 
 <html>
@@ -9,7 +7,7 @@
 <head>
 
 
-	<title>Teacher Home</title>
+	<title>UA TABLE</title>
 <style>
 	  @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,300&display=swap');
 
@@ -59,7 +57,7 @@ body{
 
 	padding: 20px;
 
-	border: 1px solid lightgray;
+	border: 1px solid #2C3E50;
 
 	border-collapse: collapse;
 
@@ -77,7 +75,7 @@ body{
 
 .table1 th{
 
-	background-color: #485976;
+	background-color: #2C3E50;
 
 	color: white;
 
@@ -94,6 +92,7 @@ body{
 	color: black;
 
 	transform: scale(1.1);
+
 
 	transition: transform 300ms ease-in;
 
@@ -115,6 +114,23 @@ body{
 
 
 }
+
+	.button {
+  background-color: #f44336;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.button{
+	background-color: #f44336;
+}
+
 </style>
 
 <style>
@@ -122,7 +138,7 @@ body{
 
 
 .table_responsive{
-max-width: 100%;
+width: 1000px;
 border: 1px solid #00bcd4;
 background-color: #efefef33;
 padding: 15px;
@@ -151,34 +167,13 @@ border-radius: 4px;
 	border: 1px solid #00000017;
 	padding: 10px 15px;
 }
-.action-btn{
-   display: flex;
-   justify-content: center;
-   gap: 10px;
-}
+
 .action-btn1{
    display: flex;
    justify-content: center;
    gap: 10px;
 }
-.action-btn2{
-   display: flex;
-   justify-content: center;
-   gap: 10px;
-}
-.action-btn>a{
-	text-decoration: none;
-	color: #fff;
-	background: #d63384;
-	border: 1px solid #d63384;
-	display:inline-block;
-	padding: 7px 20px;
-	font-weight: bold;
-	border-radius: 3px;
-	transition: 0.3s ease-in-out ;
 
-
-}
 .action-btn1>a{
 	text-decoration: none;
 	color: #fff;
@@ -192,34 +187,15 @@ border-radius: 4px;
 
 
 }
-.action-btn2>a{
-	text-decoration: none;
-	color: #fff;
-	background: #F44335;
-	border: 1px solid #F44335;
-	display:inline-block;
-	padding: 7px 20px;
-	font-weight: bold;
-	border-radius: 3px;
-	transition: 0.3s ease-in-out ;
 
 
-}
-
-.action-btn>a:hover{
-	box-shadow: 0 3px 8px #0003;
-
-}
 
 .action-btn1>a:hover{
 	box-shadow: 0 3px 8px #0003;
 
 }
 
-.action-btn2>a:hover{
-	box-shadow: 0 3px 8px #0003;
 
-}
 body>.tbody>tr{
 	background-color: #fff;
 	transition: 0.3s ease-in-out;
@@ -239,58 +215,7 @@ body>.tbody>tr:hover{
 </head>
 
 <body>
-	<div class="element1">
 
-<table class="table1">
-	<thead>
-        <tr>
-            <th colspan="7"><h1>All Courses</h1></th>
-        </tr>
-    </thead>
-
-	<tr>
-
-		<th>Course Name</th>
-
-		<th>Course Code</th>
-
-		<th>Section</th>
-
-		<th>Depertment</th>
-
-		<th>Room</th>
-		<th>Class Start Time</th>
-		<th>Class End Time</th>
-
-	</tr>
-    @foreach($users as $da1)
-
-	<tr>
-
-		<td>{{$da1->cname}}</td>
-
-		<td>{{$da1->cid}}</td>
-
-		<td>{{$da1->section}}</td>
-
-		<td>{{$da1->department}} </td>
-		<td>{{$da1->Room}}</td>
-
-		<td>{{$da1->ctimestart}}</td>
-		<td>{{$da1->ctimeend}} </td>
-
-	</tr>
-    @endforeach
-
-
-
-
-
-
-
-
-</table>
-</div>
 
 <!--2nd table-->
 <div class="element2">
@@ -299,71 +224,131 @@ body>.tbody>tr:hover{
 
 <table class="table">
 
-           <div style="text-align: center;"><h1>All Booked Counselling Hours</h1></div><br>
+           <div style="text-align: center;"><h1>Information About Courses</h1></div><br>
 
 	<thead class="head">
 
        <tr>
-       	  <th>Date</th>
-       	  <th>Day</th>
-		  <th>Student Name</th>
-		  <th>Student Id</th>
+
+		  <th>Teacher Name</th>
+		  <th>Course Name</th>
+		  <th>Section</th>
 		  <th>Start Time</th>
 		  <th>End Time</th>
-		  <th>Status</th>
-		  <th>Comment</th>
-    	  <th>Write Comment</th>
-		  <th>Accept</th>
-		  <th>Cancel</th>
+    	  <th>Action</th>
+
 	   </tr>
     </thead>
+@foreach ($data as $da )
+
 
 
     <tbody class="tbody">
-        @foreach($data as $da)
     	<tr>
-    		<td>{{$da->date}}</td>
-    		<td>{{$da->day}}</td>
-    		<td>{{$da->sname}}</td>
-    		<td>{{$da->sid}}</td>
-    		<td>{{$da->start}}</td>
-    		<td>{{$da->end}}</td>
-    		<td>{{$da->states}}</td>
-    		<td>{{$da->comment}}</td>
-    		<td>
-    			<span class="action-btn">
-    				<a href="#">Comment</a>
-    			</span>
-    		</td>
+    		<td>{{ $da->cid}}</td>
+    		<td>{{ $da->cname}}</td>
+    		<td>{{ $da->section}}</td>
+    		<td>{{ $da->ctimestart}}</td>
+    		<td>{{ $da->ctimeend}}</td>
+
     		<td>
     			<span class="action-btn1">
-    				<a href="#">Accepted</a>
+    				<a href="teacherua/{{$da->section}}/{{$da->cid}}">View</a>
     			</span>
     		</td>
-    		<td>
 
-    			<span class="action-btn2">
-    				<a href="#">Cancelled</a>
-    			</span>
-    		</td>
 
     	</tr>
-        @endforeach
 
 
     </tbody>
+    @endforeach
 </table>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 </div>
 
 </div>
 
+<!--table-->
+<div class="element1">
+
+<table class="table1">
+	<thead>
+        <tr>
+            <th colspan="7"><h1>All Undergraduate Assistant List</h1></th>
+        </tr>
+    </thead>
+
+	<tr>
+		<th>Student Name</th>
+		<th>Student Id</th>
+
+		<th>Course Name</th>
+
+		<th>Course Code</th>
+
+		<th>Section</th>
+
+		<th>Satus</th>
+
+		<th>Action</th>
+
+
+	</tr>
+
+    @foreach ($data100 as $da1 )
+
+
+	<tr>
+		<td>{{$da1->sname}}</td>
+		<td>{{$da1->sid}}</td>
+
+		<td>{{$da1->cname}}</td>
+
+		<td>{{$da1->cid}}</td>
+
+		<td>{{$da1->section}}</td>
+
+		<td>{{$da1->status}}</td>
+        <td><a href="/deleteua/{{$da1->id}}"><button class="button button">Delete</button></a></td>
+
+
+
+
+
+	</tr>
+
+
+
+    @endforeach
+
+
+
+
+
+
+
+</table>
+</div>
+<br>
+<br>
+<br>
+<div style="color: green">
+    <a href="publicua"><button type="button" >Public</button></a>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<button>fhrtj</button>
+<br>
 </body>
+
+
+
+
 
 
 </html>

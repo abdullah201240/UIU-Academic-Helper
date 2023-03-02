@@ -28,13 +28,13 @@
 
 
 
-        <div class="logo_name">Uiu Accadamic Sulutions</div>
+        <div class="logo_name">UIU ECATS</div>
         <i class='bx bx-menu' id="btn" ></i>
     </div>
     <ul class="nav-list">
 
       <li>
-        <a href="/home">
+        <a href="/teacherhome">
           <i class='bx bx-grid-alt'></i>
           <span class="links_name">Home</span>
         </a>
@@ -59,12 +59,26 @@
      </li>
 
      <li>
-       <a href="#">
+       <a href="teacher_ua_list">
          <i class='bx bx-chat' ></i>
-         <span class="links_name">Apply For U.A</span>
+         <span class="links_name"> U.A List</span>
        </a>
-       <span class="tooltip">Apply For U.A</span>
+       <span class="tooltip"> U.A List</span>
      </li>
+     <li>
+        <a href="teacher_grader_list">
+          <i class='bx bx-chat' ></i>
+          <span class="links_name"> Grader List</span>
+        </a>
+        <span class="tooltip"> Grader List</span>
+      </li>
+      <li>
+        <a href="teacher_request">
+          <i class='bx bx-chat' ></i>
+          <span class="links_name">Request</span>
+        </a>
+        <span class="tooltip"> Request</span>
+      </li>
 
 
 
@@ -73,7 +87,7 @@
      <li class="profile">
 
 
-        <a href="slogout"><i class='bx bx-log-out' id="log_out" ></i></a>
+        <a href="./"><i class='bx bx-log-out' id="log_out" ></i></a>
      </li>
     </ul>
   </div>
