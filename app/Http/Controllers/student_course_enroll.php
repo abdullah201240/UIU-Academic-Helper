@@ -811,13 +811,20 @@ United International University<br>
 
         return view('projectshowhome')->with(['data' => $data]);
     }
-    public function p_details()
+    public function p_details($id)
+    {
+        $data = DB::select("SELECT * FROM `project` WHERE project_id='$id'");
+
+        $data1= DB::select("SELECT * FROM `project_partner` WHERE  project_id='$id'");
+
+        $data2= DB::select("SELECT * FROM `project_image` WHERE id='$id'");
+        return view('p_details')->with(['data' => $data, 'data1' => $data1, 'data2' => $data2]);
+
+
+    }
+    public function p_rating($id)
     {
 
-        return view(' p_details');
-    }
-    public function p_rating()
-    {
 
 
         return view('p_rating');

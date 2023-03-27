@@ -96,9 +96,9 @@ Route::get('publicgrader', [student_course_enroll::class, 'publicgrader']);
 Route::get('publicua', [student_course_enroll::class, 'publicua']);
 
 Route::get('projectshowhome', [student_course_enroll::class, 'projectshowhome']);
-Route::get('p_details', [student_course_enroll::class, 'p_details']);
+Route::get('p_details/{id}', [student_course_enroll::class, 'p_details']);
 
-Route::get('p_rating', [student_course_enroll::class, 'p_rating']);
+Route::get('p_rating/{id}', [student_course_enroll::class, 'p_rating']);
 Route::view("addeducation", "addeducation");
 
 Route::post('addeducation', [student_course_enroll::class, 'addeducation']);

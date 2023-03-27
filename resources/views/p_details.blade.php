@@ -1,5 +1,5 @@
-@extends('layout')
-@section('content')
+{{-- @extends('layout')
+@section('content') --}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,27 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-    <title>Rating and comment</title>
+    <title>Project Details</title>
 </head>
 <body>
+    @foreach ($data as $da)
 
 
     <section class=" container sproject mt-5 pt-5">
         <div class="row mt-5">
          <div class="col-lg-5 col-md-12 col-12">
          <video width="500" height="340" controls>
-       <source src="../navbar/uploads/1.mp4" type="video/mp4">
+       <source src=" {{ asset('images/' . $da->video) }}" type="video/mp4">
 
      </video>
 
 
          </div>
          <div class="col-lg-5 col-md-12 col-12">
-           <h3> $name </h3>
+           <h3> {{$da->project_name}} </h3>
             <div class = "item-detail">
 
-            <a href = "#" class = "item-name"><h4> $tn </h4></a>
-            <h4> $position </h4>
+            <h4> {{$da->tn}} </h4>
+            <h4>{{$da->position}}  </h4>
 
 
              <div class="stars">
@@ -38,12 +39,31 @@
                <i class="fa fa-star"></i>
                <i class="fa fa-star"></i>
              </div>
-             <p> $cid . " ".$cname </p>
+             <p> {{$da->cname}} </p>
 
-             <p> $tri </p>
-             <p>Link:  $link </p>
-             <p> $de </p>
-            <button onclick="location.href='p_rating'" class = "button" style="font-size:24px"><i class="fa fa-pencil"></i>Write Review</button>
+             <p> {{$da->tri}} </p>
+             <a href="{{$da->project_link}}"><B>Project link </B></a>
+             <p> {{$da->project_dis}} </p>
+             <p>Faculty Name: {{$da->fid}} </p>
+             <p> Team Member : </p>
+             @foreach ($data1 as $da1)
+             <a href="/showstudentprofile/{{$da1->partnerID}}"><p>Name: {{$da1->partnerName}}({{$da1->partnerID}})</p></a>
+
+
+             @endforeach
+
+             <p> Project Image : </p>
+             @foreach ($data2 as $da2)
+             <a href='{{ asset('images/' . $da2->image) }}'> <img
+                src="{{ asset('images/' . $da2->image) }}" width="130"></a>
+
+
+             @endforeach
+             <br>
+             <br>
+
+
+            <button onclick="location.href='/p_rating/{{$da->project_id}}'" class = "button" style="font-size:24px"><i class="fa fa-pencil"></i>Write Review</button>
 
             </div>
 
@@ -54,21 +74,11 @@
 
          </div>
       </section>
+    @endforeach
 
       <br><br><br>
 
-     <!--<section>
-        <h3>Reviews</h3>
-           <div class="row mb-4 ml-4">
-               <div class="col-md-12">
-                  <h4>review profile name from database</h4>
-               </div>
-               <div>
-                <p class="ml-4">fdrdjuyjf></p>
-               </div>
-           </div>
 
-     </section>-->
 
      <section id="testimonials">
        <div class="testimonials-heading">
@@ -81,7 +91,7 @@
            <div class="box-top">
              <div class="profile">
                <div class="profile-img">
-                 <img src="images/sakib.jpg">
+                 <img src="">
                </div>
                <div class="name-user">
                  <strong>name from database</strong>

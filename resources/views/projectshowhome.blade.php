@@ -62,9 +62,9 @@
                                     </div>
                                     <p>Team Name : {{ $da1->tn }} </p>
                                     <p>Course Name : {{ $da1->cname }} </p>
-                                    <p>Trimester : {{ $da1->tri }}</p>
+                                    <p>Trimester : {{ $da1->tri }}  <b>{{ $da1->position }}</b></p>
 
-                                    <a href='p_details'> <button type='button' class='add-btn'>See More</button></a>
+                                    <a href='p_details/{{ $da1->project_id }}'> <button type='button' class='add-btn'>See More</button></a>
                                 </div>
                             </div>
                         </div>
