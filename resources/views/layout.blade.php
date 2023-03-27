@@ -88,6 +88,14 @@
        </a>
        <span class="tooltip">Ebook</span>
      </li>
+     <li>
+
+     <a href="projectshowhome">
+        <i class='bx  bx-book-reader' ></i>
+         <span class="links_name">Project Show </span>
+       </a>
+       <span class="tooltip">Project Show</span>
+     </li>
 
 
 
@@ -107,7 +115,7 @@
   <footer class="footer">
   <div class="legal">
     <br>
-    <p>&copy; Copyright ©2023 All rights reserved | made by Team Echo</p>
+    <p> Copyright ©2023 All rights reserved | made by Team Echo</p>
 
 
   </div>

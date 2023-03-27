@@ -95,5 +95,23 @@ Route::get('graderadd/{sid}/{sname}/{cid}/{cname}/{section}/{tid}', [student_cou
 Route::get('publicgrader', [student_course_enroll::class, 'publicgrader']);
 Route::get('publicua', [student_course_enroll::class, 'publicua']);
 
+Route::get('projectshowhome', [student_course_enroll::class, 'projectshowhome']);
+Route::get('p_details', [student_course_enroll::class, 'p_details']);
+
+Route::get('p_rating', [student_course_enroll::class, 'p_rating']);
+Route::view("addeducation", "addeducation");
+
+Route::post('addeducation', [student_course_enroll::class, 'addeducation']);
+
+Route::get('deleteeducation/{id}', [student_course_enroll::class, 'deleteeducation']);
+Route::view("addproject", "addproject");
+Route::post('addproject', [student_course_enroll::class, 'addproject']);
+
+Route::view("projectpropojalfrom", "projectpropojalfrom");
+Route::post('projectpropojalfrom', [student_course_enroll::class, 'projectpropojalfrom']);
+
+Route::get('projectpropojalfrom', [student_course_enroll::class, 'showtacherinprojectfrom']);
 
 
+Route::get('myproject', [student_course_enroll::class, 'myproject']);
+Route::view("projectedit", "projectedit");

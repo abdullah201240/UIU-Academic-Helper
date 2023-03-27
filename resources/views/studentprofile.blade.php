@@ -131,7 +131,7 @@
                             </div>
                 @endforeach
 
-                <h1 style="text-align: center"> Education <a href="addeducation.php"><a href=""> <i class='bx bx-plus-medical' ></i></a> </h1>
+                <h1 style="text-align: center"> Education <a href="addeducation.php"><a href="addeducation"> <i class='bx bx-plus-medical' ></i></a> </h1>
                 <div>
                     @foreach ($data21 as $da21)
                         <div class="card mb-3">
@@ -186,7 +186,7 @@
                             </div>
                             <div style="text-align:center">
 
-                                <a href=''><button type='button' class='btn btn-danger'>Delete</button></a>
+                                <a href='deleteeducation/{{$da21->id}}'><button type='button' class='btn btn-danger'>Delete</button></a>
 
                             </div>
                             <p>----------------------------------------------------------------------------
@@ -197,7 +197,7 @@
                     <br>
 
 
-                    <h1 style="text-align: center"> All Projects <a href="http://"><i class='bx bx-plus-medical' ></i></a> </h1>
+                    <h1 style="text-align: center"> All Projects <a href="addproject"><i class='bx bx-plus-medical' ></i></a> </h1>
 
 
                     <div>
@@ -246,6 +246,7 @@
                                         <div class="col-sm-9 text-secondary">
                                             @foreach ($data23 as $da23)
                                                 {{ $da23->partnerName . ', ' }}
+                                                {{ $da22->project_id }}
                                             @endforeach
 
 

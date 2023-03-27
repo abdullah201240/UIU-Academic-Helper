@@ -154,7 +154,12 @@ class student_course_enroll extends Controller
 
         $data27 = DB::select(" SELECT * FROM `achievements` WHERE sid='$sid'");
 
+        $data23 = [];
+        $data24 = [];
+        $data25 = [];
+
         foreach ($data22 as $u) {
+
             $project_id = $u->project_id;
             $data23 = DB::select(" SELECT * FROM `project_partner` WHERE project_id='$project_id'");
 
@@ -162,9 +167,8 @@ class student_course_enroll extends Controller
             $data24 = DB::select(" SELECT * FROM `project_faculty` WHERE project_id='$project_id'");
 
             $data25 = DB::select("  SELECT * FROM `project_image` WHERE id='$project_id'");
-            return view('studentprofile')->with(['data20' => $data20, 'data21' => $data21, 'data22' => $data22, 'data23' => $data23, 'data24' => $data24, 'data25' => $data25, 'data26' => $data26, 'data27' => $data27]);
         }
-        return view('studentprofile')->with(['data20' => $data20, 'data21' => $data21, 'data22' => $data22, 'data26' => $data26, 'data27' => $data27]);
+        return view('studentprofile')->with(['data20' => $data20, 'data21' => $data21, 'data22' => $data22, 'data23' => $data23, 'data24' => $data24, 'data25' => $data25, 'data26' => $data26, 'data27' => $data27]);
     }
     public function  showallbook()
     {
@@ -273,6 +277,7 @@ class student_course_enroll extends Controller
         $data21 = DB::select("SELECT * FROM `education` WHERE sid='$sid'");
 
         $data22 = DB::select(" Select * from project where sid='$sid'");
+
 
         $data26 = DB::select(" Select * from experience where  sid='$sid'");
 
@@ -596,8 +601,8 @@ class student_course_enroll extends Controller
         }
         $data = DB::select("SELECT * FROM `course` WHERE Occupied > '34' AND credit='3'");
 
-                $data1 = DB::select("SELECT * FROM `apply` WHERE sid='$sid' AND credit='3'");
-                return view('graderhome')->with(['data' => $data, 'data1' => $data1]);
+        $data1 = DB::select("SELECT * FROM `apply` WHERE sid='$sid' AND credit='3'");
+        return view('graderhome')->with(['data' => $data, 'data1' => $data1]);
     }
     public function showua()
     {
@@ -797,5 +802,87 @@ United International University<br>
             }
             return redirect('teacher_grader_list');
         }
+    }
+
+    public function projectshowhome()
+    {
+
+        $data = DB::select("SELECT * FROM `project` WHERE  cid!=''");
+
+        return view('projectshowhome')->with(['data' => $data]);
+    }
+    public function p_details()
+    {
+
+        return view(' p_details');
+    }
+    public function p_rating()
+    {
+
+
+        return view('p_rating');
+    }
+    public function addeducation(Request $req)
+    {
+        $pname = $req->pname;
+        $pd = $req->pd;
+        $pl = $req->pl;
+        $end = $req->end;
+        $id = Session::get('$sid');
+        $sname = Session::get('$sname');
+        $data = array('name' => $pname, "subject" => $pd, "start" => $pl, "end" => $end, "sid" => $id, "sname" => $sname, "hide" => "0");
+        DB::table('education')->insert($data);
+
+
+        return redirect("studentprofile");
+    }
+    public function deleteeducation($id)
+    {
+        DB::delete('DELETE FROM `education` WHERE  id = ?', [$id]);
+
+        return redirect("studentprofile");
+    }
+    public function addproject(Request $req)
+    {
+
+        $pname = $req->pname;
+        $pd = $req->pd;
+        $pl = $req->pl;
+        $id = Session::get('$sid');
+        $sname = Session::get('$sname');
+        $data = array('project_name' => $pname, "project_dis" => $pd, "project_link" => $pl, "sid" => $id, "sname" => $sname, "fid" => "", "hide" => "0", "tri" => "", "cid" => "", "cname" => "", "sec" => "", "tn" => "", "image" => "", "video" => "", "position" => "");
+        DB::table('project')->insert($data);
+        return redirect("studentprofile");
+    }
+    public function projectpropojalfrom(Request $req)
+    {
+        $id = Session::get('$sid');
+        $sname = Session::get('$sname');
+        $pt = $req->pt;
+        $tn = $req->tn;
+        $tri = $req->tri;
+        $cn = $req->cn;
+        $ci = $req->ci;
+        $sec = $req->sec;
+        $faculty = $req->faculty;
+        $de = $req->de;
+
+        $data = array('project_name' => $pt, "project_dis" => $de, "project_link" => "", "sid" => $id, "sname" => $sname, "fid" => "$faculty", "hide" => "0", "tri" => "$tri", "cid" => "$ci", "cname" => "$cn", "sec" => "$sec", "tn" => "$tn", "image" => "", "video" => "", "position" => "");
+        DB::table('project')->insert($data);
+        return redirect("projectpropojalfrom");
+    }
+    public function showtacherinprojectfrom()
+    {
+        $sid = Session::get('$sid');
+        $data2 = DB::select("SELECT * FROM `project` WHERE sid='$sid'");
+        $data = DB::select("SELECT * FROM `teacher`");
+        return view('projectpropojalfrom', ['data' => $data], ['data2' => $data2]);
+    }
+    public function myproject()
+    {
+
+        $sid = Session::get('$sid');
+        $data4 = DB::select("SELECT * FROM `project` WHERE sid='$sid'");
+        return view('myproject', ['data4' => $data4]);
     }
 }
