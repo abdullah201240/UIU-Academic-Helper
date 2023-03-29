@@ -29,7 +29,7 @@
 
                 <section>
                     <div>
-                        <h4> Course name code</h4>
+
 
                     </div>
 
@@ -55,11 +55,12 @@
                                     <a href='p_details' class='item-name'></a>
 
                                     <div class='stars'>
-                                        <i class='fa fa-star'></i>
+                                        <i class="fas fa-star"></i>
 
 
 
                                     </div>
+                                    <h1>{{ $da1->project_name }} </h1>
                                     <p>Team Name : {{ $da1->tn }} </p>
                                     <p>Course Name : {{ $da1->cname }} </p>
                                     <p>Trimester : {{ $da1->tri }}  <b>{{ $da1->position }}</b></p>
@@ -105,6 +106,7 @@
 
             body {
                 font-family: 'Poppins', sans-serif;
+
             }
 
 

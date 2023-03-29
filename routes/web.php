@@ -99,6 +99,8 @@ Route::get('projectshowhome', [student_course_enroll::class, 'projectshowhome'])
 Route::get('p_details/{id}', [student_course_enroll::class, 'p_details']);
 
 Route::get('p_rating/{id}', [student_course_enroll::class, 'p_rating']);
+Route::post('p_rating/{id}', [student_course_enroll::class, 'p_ratingone']);
+
 Route::view("addeducation", "addeducation");
 
 Route::post('addeducation', [student_course_enroll::class, 'addeducation']);
@@ -115,3 +117,10 @@ Route::get('projectpropojalfrom', [student_course_enroll::class, 'showtacherinpr
 
 Route::get('myproject', [student_course_enroll::class, 'myproject']);
 Route::view("projectedit", "projectedit");
+
+Route::get('grader_payment_form', [student_course_enroll::class, 'grader_payment_form']);
+
+Route::post('grader_payment_form', [student_course_enroll::class, 'grader_payment_formone']);
+Route::get('grader_payment_form_show', [student_course_enroll::class, 'grader_payment_form_show']);
+
+Route::get('delete-user/{id}', [student_course_enroll::class, 'deleteuser']);

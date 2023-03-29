@@ -815,19 +815,44 @@ United International University<br>
     {
         $data = DB::select("SELECT * FROM `project` WHERE project_id='$id'");
 
-        $data1= DB::select("SELECT * FROM `project_partner` WHERE  project_id='$id'");
+        $data1 = DB::select("SELECT * FROM `project_partner` WHERE  project_id='$id'");
 
-        $data2= DB::select("SELECT * FROM `project_image` WHERE id='$id'");
-        return view('p_details')->with(['data' => $data, 'data1' => $data1, 'data2' => $data2]);
+        $data2 = DB::select("SELECT * FROM `project_image` WHERE id='$id'");
+        $data3 = DB::select("SELECT * FROM `review` WHERE  pid='$id'");
+
+        $data4 = DB::select("SELECT SUM(star) as a, COUNT(id) as b FROM review WHERE   pid='$id'");
 
 
+
+        return view('p_details')->with(['data' => $data, 'data1' => $data1, 'data2' => $data2, 'data3' => $data3 ,'data4' => $data4]);
     }
     public function p_rating($id)
     {
 
+        // $comment = $req->com;
+        // $star = $req->rate;
+
+        // $sid = Session::get('$sid');
+        // $sname = Session::get('$sname');
+        // $data = array('star' => $star, "comment" => $comment,  "sid" => $sid, "sname" => $sname, "pid" => "$id");
+        // DB::table('review')->insert($data);
 
 
         return view('p_rating');
+    }
+    public function p_ratingone($id, Request $req)
+    {
+
+        $comment = $req->com;
+        $star = $req->rate;
+
+        $sid = Session::get('$sid');
+        $sname = Session::get('$sname');
+        $data = array('star' => $star, "comment" => $comment,  "sid" => $sid, "sname" => $sname, "pid" => "$id");
+        DB::table('review')->insert($data);
+
+
+        return redirect('projectshowhome');
     }
     public function addeducation(Request $req)
     {
@@ -891,5 +916,48 @@ United International University<br>
         $sid = Session::get('$sid');
         $data4 = DB::select("SELECT * FROM `project` WHERE sid='$sid'");
         return view('myproject', ['data4' => $data4]);
+    }
+    public function grader_payment_form(){
+        $sid = Session::get('$sid');
+
+
+        $data5 = DB::select(" SELECT * FROM `graderpyment` WHERE sid='$sid'");
+        return response()->json(['data5' => $data5]);
+        // return view('grader_payment_form', ['data4' => $data4,'data5' => $data5]);
+    }
+    public function grader_payment_formone(Request $req){
+        $sid = Session::get('$sid');
+
+        $name=$req->name;
+        $cid=$req->cid;
+        $as1=$req->as1;
+        $as2=$req->as2;
+        $as3=$req->as3;
+        $as4=$req->as4;
+        $sec=$req->sec;
+
+
+
+        $data = array('sid' => $sid, "sname" => $name, "as1" => "$as1", "as2" => $as2, "as3" => $as3, "as4" => "$as4" ,"section" => "$sec","cid"=>$cid,"status"=>"Pending");
+        DB::table('graderpyment')->insert($data);
+
+
+
+
+
+
+        return redirect("grader_payment_form_show");
+    }
+    public function grader_payment_form_show(){
+        $data4 = DB::select(" SELECT * FROM `course`");
+        return view('grader_payment_form_show', ['data4' => $data4]);
+
+    }
+    public function deleteuser($id){
+
+ DB::delete('DELETE FROM `graderpyment` where id = ?', [$id]);
+
+        return redirect("grader_payment_form_show");
+
     }
 }

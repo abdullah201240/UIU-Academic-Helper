@@ -148,24 +148,25 @@ form .btn button:hover{
     </style>
   </head>
   <body>
+    <form action="" method="post">
+      @csrf
     <div class="container">
 
       <div class="star-widget">
-        <input type="radio" name="rate" id="rate-5">
+        <input type="radio" value="5" name="rate" id="rate-5">
         <label for="rate-5" class="fas fa-star"></label>
-        <input type="radio" name="rate" id="rate-4">
-        <label for="rate-4" class="fas fa-star"></label>
-        <input type="radio" name="rate" id="rate-3">
+        <input type="radio" value="4" name="rate" id="rate-4">
+        <label for="rate-4"class="fas fa-star"></label>
+        <input type="radio" value="3" name="rate" id="rate-3">
         <label for="rate-3" class="fas fa-star"></label>
-        <input type="radio" name="rate" id="rate-2">
+        <input type="radio" value="2" name="rate" id="rate-2">
         <label for="rate-2" class="fas fa-star"></label>
-        <input type="radio" name="rate" id="rate-1">
+        <input type="radio" value="1" name="rate" id="rate-1">
         <label for="rate-1" class="fas fa-star"></label>
-        <form action="" method="post">
-            @csrf
+
           <header></header>
           <div class="textarea">
-            <textarea cols="30" placeholder="Please, give your review about the project" required></textarea>
+            <textarea cols="30" name="com"placeholder="Please, give your review about the project" required></textarea>
           </div>
           <div class="btn">
 

@@ -1,5 +1,5 @@
-{{-- @extends('layout')
-@section('content') --}}
+ @extends('layout')
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,33 +11,43 @@
 </head>
 <body>
     @foreach ($data as $da)
-
-
-    <section class=" container sproject mt-5 pt-5">
+<center>
+    <br><br>
+    <section class=" container sproject mt-5 pt-5" >
         <div class="row mt-5">
          <div class="col-lg-5 col-md-12 col-12">
-         <video width="500" height="340" controls>
+         <video width="900" height="400" controls>
        <source src=" {{ asset('images/' . $da->video) }}" type="video/mp4">
 
      </video>
 
 
-         </div>
-         <div class="col-lg-5 col-md-12 col-12">
-           <h3> {{$da->project_name}} </h3>
+    </div>
+    <div class="col-lg-5 col-md-12 col-12">
+           <h1><b> {{$da->project_name}}</b> </h1>
             <div class = "item-detail">
 
             <h4> {{$da->tn}} </h4>
             <h4>{{$da->position}}  </h4>
 
 
-             <div class="stars">
+             <div class="reviews">
+                @foreach ($data4 as $da4)
+                @for ($i =0; $i <= $da4->a/$da4->b; $i++)
 
+                <i class="fas fa-star"></i>
+
+              @endfor
+
+
+
+                @endforeach
+
+               {{-- <i class="fa fa-star"></i>
                <i class="fa fa-star"></i>
                <i class="fa fa-star"></i>
                <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
+               <i class="fa fa-star"></i> --}}
              </div>
              <p> {{$da->cname}} </p>
 
@@ -45,17 +55,40 @@
              <a href="{{$da->project_link}}"><B>Project link </B></a>
              <p> {{$da->project_dis}} </p>
              <p>Faculty Name: {{$da->fid}} </p>
-             <p> Team Member : </p>
-             @foreach ($data1 as $da1)
-             <a href="/showstudentprofile/{{$da1->partnerID}}"><p>Name: {{$da1->partnerName}}({{$da1->partnerID}})</p></a>
+
+             <div class="container1">
+                <table id="table_data" style="background:rgb(217, 224, 227); width:100%; height:80%;">
+                    <thead><center><h3>Project Member List</h3></center></thead>
+                    <tr style="background:rgb(193, 203, 230);">
+                        <th>Member Name</th>
+                        <th>Member ID</th>
+
+                    </tr>
+                    @foreach ($data1 as $da1)
+                    <tr>
+                        <td>{{$da1->partnerName}}</td>
+                        <td>{{$da1->partnerID}}</td>
+
+                    </tr>
 
 
-             @endforeach
 
-             <p> Project Image : </p>
+                    @endforeach
+
+
+
+                </table>
+                </div>
+
+
+
+
+
+
+             <h1><b> <p> Project Image : </p></b></h1>
              @foreach ($data2 as $da2)
-             <a href='{{ asset('images/' . $da2->image) }}'> <img
-                src="{{ asset('images/' . $da2->image) }}" width="130"></a>
+             <a href='{{ asset('images/' . $da2->image) }}'width="300" height="300"> <img
+                src="{{ asset('images/' . $da2->image) }}" width="300" height="300"></a>
 
 
              @endforeach
@@ -76,28 +109,40 @@
       </section>
     @endforeach
 
-      <br><br><br>
+
 
 
 
      <section id="testimonials">
        <div class="testimonials-heading">
-         <span><h3>Reviews & Ratings</h3></span>
-
+        <div class="container2">
+         <span><h1>Reviews & Ratings For This Project</h1></span>
+        </div>
 
        </div>
+
        <div class="testimonials-box-container">
+        @foreach ($data3 as $da3)
          <div class="testimonials-box">
            <div class="box-top">
+
              <div class="profile">
-               <div class="profile-img">
-                 <img src="">
-               </div>
+
+
                <div class="name-user">
-                 <strong>name from database</strong>
-                 <span>@name frpm database</span>
+                <a href="/showstudentprofile/{{$da3->sid}}"><strong>{{$da3->sname}}</strong></a>
+                 <span>{{$da3->sid}}</span>
                </div>
              </div>
+             <div class="reviews">
+             @for ($i =1; $i <= $da3->star; $i++)
+
+                <i class="fas fa-star"></i>
+
+              @endfor
+            </div>
+
+             {{-- @foreach ($da3->star as $da4)
              <div class="reviews">
                <i class="fas fa-star"></i>
                <i class="fas fa-star"></i>
@@ -105,36 +150,16 @@
                <i class="fas fa-star"></i>
                <i class="fas fa-star"></i>
              </div>
+             @endforeach --}}
            </div>
          <div class="comment">
-           <p>reviews from database will be fetched and visible here</p>
+           <p>{{$da3->comment}}</p>
 
          </div>
-         </div>
-          <div class="testimonials-box">
-           <div class="box-top">
-             <div class="profile">
-               <div class="profile-img">
-                 <img src="images/sakib.jpg">
-               </div>
-               <div class="name-user">
-                 <strong>name from database</strong>
-                 <span>@name frpm database</span>
-               </div>
-             </div>
-             <div class="reviews">
-               <i class="fas fa-star"></i>
-               <i class="fas fa-star"></i>
-               <i class="fas fa-star"></i>
-               <i class="fas fa-star"></i>
-               <i class="fas fa-star"></i>
-             </div>
-           </div>
-         <div class="comment">
-           <p>reviews from database will be fetched and visible here</p>
 
          </div>
-         </div>
+         @endforeach
+
          <br>
          <br>
          <br>
@@ -146,6 +171,12 @@
        </div>
 
      </section>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
 
       <script>
 
@@ -171,7 +202,26 @@ gridViewBtn.addEventListener('click', () => {
       </script>
 
 
+<style>
+       .container1 {
+        max-width: 1000px;
+        width: 100%;
+        background-color: #fcfcfcf0;
+        padding: 25px 30px;
+        border-radius: 5px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    }
+    .container2 {
+        max-width: 800px;
+        width: 100%;
+        background-color: #fcfcfcf0;
+        padding: 25px 30px;
+        border-radius: 5px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    }
 
+
+</style>
 
 
 
@@ -209,6 +259,9 @@ gridViewBtn.addEventListener('click', () => {
 
 
 <style>
+    body{
+        background-color: #d1efd8
+    }
     .small-img-group{
      display:flex;
      justify-content: space-between;
