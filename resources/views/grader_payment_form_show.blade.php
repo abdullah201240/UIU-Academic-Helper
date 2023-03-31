@@ -46,6 +46,25 @@
 
                          <div class="input-box">
 
+                            <span class="details">Teacher</span>
+                            <select name="tid" id="tid" class="InputBox">
+                                <option value disabled selected></option>
+                                @foreach ($data5 as $da5)
+                                    <option value='{{ $da5->id }}'> {{ $da5->name }}</option>
+                                @endforeach
+
+
+
+
+
+
+                            </select>
+                            <div class="error"></div>
+
+                        </div>
+
+                         <div class="input-box">
+
                              <span class="details">Section</span>
                              <select name="sec" id="sec" class="InputBox">
                                  <option value disabled selected></option>
@@ -143,14 +162,7 @@
 
 
      <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-     {{-- <script>
-         function myFunction() {
-             alert("The button was pressed");
 
-
-
-         };
-     </script> --}}
      <script>
          jQuery('#frm').submit(function(e) {
 

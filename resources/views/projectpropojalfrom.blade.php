@@ -245,7 +245,7 @@ border-radius: 4px;
 }
 .table{
   width: 100%;
-  height: 60px;
+  height: 100%;
   font-size: 13px;
   color: #444;
   white-space: nowrap;
@@ -359,7 +359,7 @@ body>.tbody>tr:hover{
          background: white;
          font-family: 'Poppins', sans-serif;
          display: flex;
-          height: 100vh;
+          height: 100%;
           justify-content: center;
           align-items: center;
           padding: 10px;

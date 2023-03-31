@@ -11,8 +11,19 @@
     </head>
 
     <body>
+        <div style="text-align:center">
+            <select name="cid" id="cid">
+                <option value="">None</option>
+                <option value="CSE 3421">Software Engineering</option>
+                <option value="CSE 3522">Database Management Systems </option>
+                <option value="CSE 3411">System Analysis and Design</option>
+                <option value="CSE 123">Electronics</option>
+                <option value="CSE 2118">Advanced Object Oriented Programming </option>
 
 
+
+            </select>
+        </div>
 
 
 
@@ -63,9 +74,10 @@
                                     <h1>{{ $da1->project_name }} </h1>
                                     <p>Team Name : {{ $da1->tn }} </p>
                                     <p>Course Name : {{ $da1->cname }} </p>
-                                    <p>Trimester : {{ $da1->tri }}  <b>{{ $da1->position }}</b></p>
+                                    <p>Trimester : {{ $da1->tri }} <b>{{ $da1->position }}</b></p>
 
-                                    <a href='p_details/{{ $da1->project_id }}'> <button type='button' class='add-btn'>See More</button></a>
+                                    <a href='p_details/{{ $da1->project_id }}'> <button type='button' class='add-btn'>See
+                                            More</button></a>
                                 </div>
                             </div>
                         </div>

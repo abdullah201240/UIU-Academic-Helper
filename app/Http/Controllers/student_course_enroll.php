@@ -616,7 +616,8 @@ class student_course_enroll extends Controller
         $tid = Session::get('$tid');
 
         $data = DB::select("SELECT * FROM `ta` WHERE tid='$tid'");
-        return view('teacher_request')->with(['data' => $data]);
+        $data2 = DB::select("SELECT * FROM `graderpyment` WHERE tid='$tid'");
+        return view('teacher_request')->with(['data' => $data,'data2' => $data2]);
     }
     public function uarej($id)
     {
@@ -935,10 +936,11 @@ United International University<br>
         $as3=$req->as3;
         $as4=$req->as4;
         $sec=$req->sec;
+        $tid=$req->tid;
 
 
 
-        $data = array('sid' => $sid, "sname" => $name, "as1" => "$as1", "as2" => $as2, "as3" => $as3, "as4" => "$as4" ,"section" => "$sec","cid"=>$cid,"status"=>"Pending");
+        $data = array('sid' => $sid, "sname" => $name, "as1" => "$as1", "as2" => $as2, "as3" => $as3, "as4" => "$as4" ,"section" => "$sec","cid"=>$cid,"status"=>"Pending","tid"=>$tid);
         DB::table('graderpyment')->insert($data);
 
 
@@ -949,8 +951,9 @@ United International University<br>
         return redirect("grader_payment_form_show");
     }
     public function grader_payment_form_show(){
-        $data4 = DB::select(" SELECT * FROM `course`");
-        return view('grader_payment_form_show', ['data4' => $data4]);
+        $data4 = DB::select("SELECT DISTINCT(cid),cname FROM `course` WHERE credit='3' ");
+        $data5 = DB::select(" SELECT * FROM `teacher`");
+        return view('grader_payment_form_show', ['data4' => $data4,'data5'=>$data5]);
 
     }
     public function deleteuser($id){
