@@ -88,6 +88,42 @@
             </div>
         </div>
 
+        <div id="filtered-data">
+            <!-- The filtered data will be displayed here -->
+        </div>
+<script>
+    // $(document).ready(function(){
+    //     $("#cid").on("change", function(){
+    //         var cid=$(this).val();
+    //         $.ajax({
+
+    //             url"{{ url('projectshowhome') }}",
+    //             type: "get",
+    //             data:{'cid:cid'},
+    //             success: function(data){
+    //                 console.log(data);
+
+    //             }
+
+
+
+
+    //         })
+
+
+
+
+    //     });
+
+
+
+    // });
+
+
+
+
+
+</script>
         <script>
             const itemList = document.querySelector('.item-list');
             const gridViewBtn = document.getElementById('grid-active-btn');

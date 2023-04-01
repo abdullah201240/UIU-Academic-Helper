@@ -124,3 +124,12 @@ Route::post('grader_payment_form', [student_course_enroll::class, 'grader_paymen
 Route::get('grader_payment_form_show', [student_course_enroll::class, 'grader_payment_form_show']);
 
 Route::get('delete-user/{id}', [student_course_enroll::class, 'deleteuser']);
+
+Route::get('projectshowedit', [student_course_enroll::class, 'projectshowedit']);
+
+Route::get('freetime', [student_course_enroll::class, 'freetime']);
+Route::get('teacherprofile', [student_course_enroll::class, 'teacherprofile']);
+Route::post('teacherprofile', [student_course_enroll::class, 'teacherprofilefrom']);
+
+Route::post('teacherprofile', [student_course_enroll::class, 'timage']);
+

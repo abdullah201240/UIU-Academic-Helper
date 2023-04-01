@@ -1,20 +1,17 @@
-
-
-
-@extends('layout')
+@extends('tlayout')
 @section('content')
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Page </title>
+    <title> Teacher Profile </title>
 
     <meta name="author" content="Codeconvey" />
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet"><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css'>
-<script type="text/javascript" src="jquery-3.3.1.js"></script>
 
 
 
@@ -41,51 +38,52 @@
       <div class="col-lg-4">
         <div class="card shadow-sm">
           <div class="card-header bg-transparent text-center">
-            <img class="profile_img" src="{{ asset('images/' . $da->image) }}" alt="Teacher dp">
-
+            <img class="profile_img" src="{{ asset('images/' . $da->image) }}" alt="student dp">
+            <form action="" method="post" enctype="multipart/form">
+                @csrf
+            <input type="file" name="image" id="upload" hidden/>
+            <label for="upload" style=" display: inline-block;background-color: indigo;color: white;padding: 0.5rem;font-family: sans-serif;border-radius: 0.3rem;cursor: pointer;margin-top: 1rem;">Edit</label>
+            <button type="submit" class="btn btn-success">Upload</button>
+          </form>
             <h3>{{$da->name}}</h3>
           </div>
           <div class="card-body">
-             <p class="mb-0"><strong class="pr-1">{{$da->profession}} Of  depertment of {{$da->department}}</strong></p>
+            <p class="mb-0"><strong class="pr-1">{{$da->profession}} Of  depertment of {{$da->department}}</strong></p>
             <p class="mb-0"><strong class="pr-1">Email ID:</strong>{{$da->email}}</p>
              <p class="mb-0"><strong class="pr-1">Room No:</strong>{{$da->room}}</p>
              <br>
              <center>
-@endforeach
-
-
-
-
-            <form action="" id="vedformid">
-
+            <form action="" method="post">
+                @csrf
             <label for="birthday"><p class="mb-0"><strong class="pr-1">Add Counselling:</strong></p></label><br>
-            <input type="date" id="birthday" name="birthday"><br><br>
-            <input type="hidden" id="custId" name="custId" value="{{$da->id}}">
+            <label for="birthday"><p class="mb-0"><strong class="pr-1">Start Time:</strong></p></label><br>
+            <input type="time" name="start"><br>
+            <label for="birthday"><p class="mb-0"><strong class="pr-1">End Time:</strong></p></label><br>
+            <input type="time" name="end"><br>
+            <label for="birthday"><p class="mb-0"><strong class="pr-1">Day :</strong></p></label><br>
+            <select name="day" id="">
 
-            <button type="submit" class="btn btn-outline-primary" name="insertbtn" id="insertbtn">Add Counselling</button>
+
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+
+            </select>
+            <br>
+            <br>
+
+            <button type="submit" class="btn btn-outline-primary">Add Counselling</button>
             </form>
+            <br>
+            <br>
             </center>
           </div>
-          <script>
-            $(document).ready(function(){
-              $('#insertbtn').click(function(e){
-                e.preventDefault();
-                 $.ajax({
-                method: "get",
-                url: "{{ url('freetime') }}",
-                data: $('#vedformid').serialize(),
-                dataType: "date",
-                success: function(response){
 
-
-
-                }
-
-              })
-
-              })
-            });
-          </script>
+          @endforeach
 
         </div>
       </div>
@@ -128,6 +126,7 @@
 
 
 
+
   </tr>
   @endforeach
 
@@ -158,7 +157,8 @@
     <th>End Time</th>
 
   </tr>
-@foreach ($data2 as $da2)
+
+  @foreach ($data2 as $da2)
 
 
   <tr>
@@ -169,6 +169,7 @@
     <td>{{$da2->end}}</td>
   </tr>
 @endforeach
+
 </table>
 </center>
 <br>
@@ -195,7 +196,8 @@
     <th>End Time</th>
 
   </tr>
-@foreach ( $data3 as $da3)
+
+  @foreach ( $data3 as $da3)
 
 
   <tr>
@@ -208,66 +210,12 @@
     <td>{{$da3->end}}</td>
   </tr>
 @endforeach
+
 </table>
 </center>
 <br>
-
       </div>
     </div>
-    <div style="height: 26px"></div>
-        <div class="card shadow-sm">
-          <div class="card-header bg-transparent border-0">
-            <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Counselling Date & Time</h3>
-          </div>
-          <div>
- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-<script>
-  $(document).ready(function () {
-    $.ajax({
-        type: "GET",
-        url: "",
-        dataType: "html",
-        success: function (data) {
-            $("#data").html(data);
-
-        }
-    });
-});
-</script>
-
-
-
-  <center>
-<table class="table2">
-
-
-  <tr>
-
-    <th>Date</th>
-
-    <th>Day</th>
-
-    <th>Start Time</th>
-    <th>End Time</th>
-
-  </tr>
-
-
-
-
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-
-
-
-</table>
-</center>
-<br>
   </div>
 </div>
 <!-- partial -->
@@ -463,5 +411,6 @@
 
 }
       </style>
+
 	</body>
 </html>

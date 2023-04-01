@@ -586,11 +586,11 @@ function sortTable(column, sort_asc) {
                                 <td>{{ $da2->as3 }}</td>
                                 <td>{{ $da2->as4 }}</td>
                                 <td>{{ $da2->status }}</td>
-                                <td><a href='uaasp/{{ $da->id }}'><button type="button"
+                                <td><a href='uaasp/{{ $da2->id }}'><button type="button"
                                             class="btn btn-success">Accpect</button></a></td>
-                                <td><a href='uarej/{{ $da->id }}'><button type="button"
+                                <td><a href='uarej/{{ $da2->id }}'><button type="button"
                                             class="btn btn-danger">Reject</button></a> </td>
-                                <td><a href='uarej/{{ $da->id }}'><button type="button"
+                                <td><a href='uarej/{{ $da2->id }}'><button type="button"
                                             class="btn btn-info">Edit</button></a> </td>
 
                             </tr>

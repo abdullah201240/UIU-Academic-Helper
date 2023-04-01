@@ -239,21 +239,7 @@
                                         </div>
                                     </div>
                                     <br>
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Project Partner</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            @foreach ($data23 as $da23)
-                                                {{ $da23->partnerName . ', ' }}
-                                                {{ $da22->project_id }}
-                                            @endforeach
 
-
-
-
-                                        </div>
-                                    </div>
                                     <br>
                                     <div class="row">
                                         <div class="col-sm-3">
@@ -262,15 +248,7 @@
 
 
                                         <div class="col-sm-9 text-secondary">
-                                            @foreach ($data24 as $da24)
-                                                <?php
-
-                                                echo "\n";
-                                                echo $da24->name . ', ';
-                                                echo '      ';
-
-                                                ?>
-                                            @endforeach
+                                            {{ $da22->fid }}
 
 
                                         </div>
@@ -279,25 +257,14 @@
 
                                     <br>
 
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Project Image</h6>
-                                        </div>
 
 
-                                        <div class="col-sm-9 text-secondary">
-                                            @foreach ($data25 as $da25)
-                                                <a href='images/{{ $da25->image }}'> <img
-                                                        src="images/{{ $da25->image }}" width="130"></a>
-                                            @endforeach
 
-                                        </div>
-                                    </div>
+
 
                                     <hr>
                                     <div style="text-align: center">
-                                        <a href=''><button type='button'
-                                                class='btn btn-primary'>Edit</button></a>
+
 
                                         <a href=''><button type='button'
                                                 class='btn btn-danger'>Delete</button></a>

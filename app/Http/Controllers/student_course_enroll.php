@@ -141,6 +141,19 @@ class student_course_enroll extends Controller
 
         return view('show_teacher_profile')->with(['data' => $data, 'data1' => $data1, 'data2' => $data2, 'data3' => $data3]);
     }
+
+    public function freetime(Request $request){
+        $birthday=$request->birthday;
+        $newDate = date('l', strtotime($birthday));
+        $tid=$request->custId;
+
+
+
+       $data6 = DB::select("SELECT * FROM `time_schedule` WHERE tid='$tid' and day='$newDate' and  NOT EXISTS(SELECT * from bokking WHERE bokking.date='$birthday' and time_schedule.id=bokking.bid)");
+
+      return response()->json(['data5' => $data6]);
+
+    }
     public function  studentprofile()
     {
         $sid = Session::get('$sid');
@@ -622,7 +635,7 @@ class student_course_enroll extends Controller
     public function uarej($id)
     {
 
-        $data = DB::UPDATE("UPDATE `ta` SET `status`='Reject' WHERE id='$id'");
+         DB::UPDATE("UPDATE `ta` SET `status`='Reject' WHERE id='$id'");
         return redirect('teacher_request');
     }
     public function uaasp($id)
@@ -810,8 +823,22 @@ United International University<br>
 
         $data = DB::select("SELECT * FROM `project` WHERE  cid!=''");
 
+
         return view('projectshowhome')->with(['data' => $data]);
     }
+    // public function projectshowhomes(Request $request)
+    // {
+
+    //     $data = DB::select("SELECT * FROM `project` WHERE  cid!=''");
+    //     if($request->ajax){
+    //         $data = DB::select("SELECT * FROM `project` WHERE  cid='$request->cid'");
+    //         return response()->json(['cid'=>$data]);
+
+    //     }
+
+    //     return view('projectshowhome')->with(['data' => $data]);
+    // }
+
     public function p_details($id)
     {
         $data = DB::select("SELECT * FROM `project` WHERE project_id='$id'");
@@ -963,4 +990,94 @@ United International University<br>
         return redirect("grader_payment_form_show");
 
     }
+    public function projectshowedit(){
+
+return view('projectshowedit');
+    }
+    public function teacherprofile(){
+        $tid = Session::get('$tid');
+
+        $data = DB::select("SELECT * FROM `teacher` where id='$tid'");
+        $data1 = DB::select("SELECT * FROM `course` WHERE tid='$tid'");
+
+        $data2 = DB::select(" SELECT * FROM time_schedule WHERE tid='$tid'");
+
+        $data3 = DB::select("SELECT * FROM `bokking` WHERE tid='$tid'");
+
+
+
+
+
+        return view('teacherprofile')->with(['data' => $data, 'data1' => $data1, 'data2' => $data2, 'data3' => $data3]);
+
+
+
+    }
+
+    public function teacherprofilefrom(Request $request){
+        $tid = Session::get('$tid');
+
+
+
+        $tname = Session::get('$tname');
+
+        $day=$request->day;
+        $start=$request->start;
+        $end=$request->end;
+
+        $data20 = array('tid' => $tid, "tname" => $tname, "day" => $day, "start" => $start, "end" => $end);
+        DB::table('time_schedule')->insert($data20);
+        $data = DB::select("SELECT * FROM `teacher` where id='$tid'");
+        $data1 = DB::select("SELECT * FROM `course` WHERE tid='$tid'");
+
+        $data2 = DB::select(" SELECT * FROM time_schedule WHERE tid='$tid'");
+
+        $data3 = DB::select("SELECT * FROM `bokking` WHERE tid='$tid'");
+
+
+
+        return view('teacherprofile')->with(['data' => $data, 'data1' => $data1, 'data2' => $data2, 'data3' => $data3]);
+
+
+
+    }
+    public function timage(Request $request){
+        $tid = Session::get('$tid');
+        $request->image;
+
+
+
+    // Move the uploaded image to the storage location
+    $image =  $request->image;;
+    $imageName = $image->getClientOriginalName();
+    $image->move(public_path('images'), $imageName);
+
+
+
+
+
+
+
+
+
+
+
+
+        DB::update("UPDATE `teacher` SET `image`='$imageName' WHERE  id=?", [$tid]);
+
+        $data = DB::select("SELECT * FROM `teacher` where id='$tid'");
+        $data1 = DB::select("SELECT * FROM `course` WHERE tid='$tid'");
+
+        $data2 = DB::select(" SELECT * FROM time_schedule WHERE tid='$tid'");
+
+        $data3 = DB::select("SELECT * FROM `bokking` WHERE tid='$tid'");
+
+
+
+        return view('teacherprofile')->with(['data' => $data, 'data1' => $data1, 'data2' => $data2, 'data3' => $data3]);
+
+
+
+    }
+
 }
