@@ -127,9 +127,15 @@ Route::get('delete-user/{id}', [student_course_enroll::class, 'deleteuser']);
 
 Route::get('projectshowedit', [student_course_enroll::class, 'projectshowedit']);
 
-Route::get('freetime', [student_course_enroll::class, 'freetime']);
+Route::post('show_teacher_profile/{id}', [student_course_enroll::class, 'freetime']);
 Route::get('teacherprofile', [student_course_enroll::class, 'teacherprofile']);
 Route::post('teacherprofile', [student_course_enroll::class, 'teacherprofilefrom']);
 
 Route::post('teacherprofile', [student_course_enroll::class, 'timage']);
 
+Route::get('addcounselling/{tname}/{tid}/{day}/{id}/{date}', [student_course_enroll::class, 'addcounselling']);
+
+
+
+Route::get('counsellingasp/{id}', [student_course_enroll::class, 'counsellingasp']);
+Route::get('counsellingrej/{id}', [student_course_enroll::class, 'counsellingrej']);

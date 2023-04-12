@@ -331,24 +331,33 @@ body>.tbody>tr:hover{
     		<td>{{$da->states}}</td>
     		<td>{{$da->comment}}</td>
     		<td>
-    			<span class="action-btn">
+    			<span class="action-btn" id="myButton" onclick='mycomment({{$da->id}})'>
     				<a href="#">Comment</a>
     			</span>
+				<div id="myPopup">
+					<form action="" method="post" enctype="multipart/form">
+					  <label for="name">Write Here!</label>
+					  <input type="text" id="name" name="name"><br>
+
+					  <input type="submit" value="Submit">
+					</form>
+				  </div>
     		</td>
     		<td>
     			<span class="action-btn1">
-    				<a href="#">Accepted</a>
+    				<a href="/counsellingasp/{{$da->id}}">Accepted</a>
     			</span>
     		</td>
     		<td>
 
     			<span class="action-btn2">
-    				<a href="#">Cancelled</a>
+    				<a href="/counsellingrej/{{$da->id}}">Cancelled</a>
     			</span>
     		</td>
 
     	</tr>
         @endforeach
+
 
 
     </tbody>
@@ -359,9 +368,77 @@ body>.tbody>tr:hover{
 <br>
 <br>
 <br>
+
+
 </div>
 
 </div>
+<script>
+function mycomment(id){
+
+
+
+
+
+
+}
+
+</script>
+
+
+
+
+<style>
+	#myPopup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #000;
+  width: 300px;
+}
+
+#myPopup form {
+  display: flex;
+  flex-direction: column;
+}
+
+#myPopup label {
+  margin-bottom: 10px;
+}
+
+#myPopup input[type="text"]{
+  padding: 30px;
+  margin-bottom: 30px;
+  border: 1px solid #ccc;
+}
+
+#myPopup input[type="submit"] {
+  padding: 5px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+#myPopup input[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+</style>
+<script>
+	var myButton = document.getElementById("myButton");
+var myPopup = document.getElementById("myPopup");
+
+myButton.addEventListener("click", function() {
+  myPopup.style.display = "block";
+});
+
+</script>
+
 
 </body>
 

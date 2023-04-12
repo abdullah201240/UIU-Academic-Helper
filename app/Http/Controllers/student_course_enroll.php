@@ -48,7 +48,7 @@ class student_course_enroll extends Controller
         $users = DB::select("SELECT * FROM `student` WHERE id= '$username' AND password='$pass'");
 
         foreach ($users as $user) {
-            echo $user->name;
+
             Session::put('$sid', $user->id);
             Session::put('$sname', $user->name);
             Session::put('$simage', $user->image);
@@ -129,6 +129,13 @@ class student_course_enroll extends Controller
 
     public function  showteacherprofile($id)
     {
+
+
+
+
+        //$birthday=$request->birthday;
+
+
         $data = DB::select("SELECT * FROM `teacher` where id='$id'");
         $data1 = DB::select("SELECT * FROM `course` WHERE tid='$id'");
 
@@ -136,24 +143,74 @@ class student_course_enroll extends Controller
 
         $data3 = DB::select("SELECT * FROM `bokking` WHERE tid='$id'");
 
+         $data6=[];
+
+
+            // $birthday = $_GET['birthday'];
+            // $newDate = date('l', strtotime($birthday));
+            // $data6 = DB::select("SELECT * FROM `time_schedule` WHERE tid='$id' and day='$newDate' and  NOT EXISTS(SELECT * from bokking WHERE bokking.date='$birthday' and time_schedule.id=bokking.bid)");
 
 
 
-        return view('show_teacher_profile')->with(['data' => $data, 'data1' => $data1, 'data2' => $data2, 'data3' => $data3]);
+
+
+        return view('show_teacher_profile')->with(['data' => $data, 'data1' => $data1, 'data2' => $data2, 'data3' => $data3, 'data6' => $data6]);
     }
 
-    public function freetime(Request $request){
-        $birthday=$request->birthday;
+    public function freetime(Request $request)
+    {
+        $birthday = $request->birthday;
         $newDate = date('l', strtotime($birthday));
-        $tid=$request->custId;
+        $tid = $request->custId;
+
+        $data = DB::select("SELECT * FROM `teacher` where id='$tid'");
+        $data1 = DB::select("SELECT * FROM `course` WHERE tid='$tid'");
+
+        $data2 = DB::select(" SELECT * FROM time_schedule WHERE tid='$tid'");
+
+        $data3 = DB::select("SELECT * FROM `bokking` WHERE tid='$tid'");
+
+
+        $data6 = DB::select("SELECT * FROM `time_schedule` WHERE tid='$tid' and day='$newDate' and  NOT EXISTS(SELECT * from bokking WHERE bokking.date='$birthday' and time_schedule.id=bokking.bid)");
 
 
 
-       $data6 = DB::select("SELECT * FROM `time_schedule` WHERE tid='$tid' and day='$newDate' and  NOT EXISTS(SELECT * from bokking WHERE bokking.date='$birthday' and time_schedule.id=bokking.bid)");
+        return view('show_teacher_profile')->with(['data' => $data, 'data1' => $data1, 'data2' => $data2, 'data3' => $data3, 'data6' => $data6,'data7'=>$birthday]);
+    }
+    public function addcounselling($tname,$tid,$day,$id,$date){
+        $data6 = DB::select("SELECT * FROM `time_schedule` WHERE tid='$tid' and id='$id'");
+        foreach ($data6 as $u) {
+            $start=$u->start;
+            $end=$u->end;
+        }
 
-      return response()->json(['data5' => $data6]);
+
+
+        $sid = Session::get('$sid');
+        $sname = Session::get('$sname');
+        $data = array('sid' => $sid, "sname" => $sname, "tid" => $tid,"tname" => $tname,"day" => $day,"bid" => $id,"start" => $start,"end" => $end,"date" => $date,"states"=>"Pending","comment"=>"");
+        DB::table('bokking')->insert($data);
+
+        return redirect("counsilling");
 
     }
+    public function counsellingasp($id){
+        DB::update("UPDATE `bokking` SET `states`='Accepted' WHERE id=?", [$id]);
+
+
+        return redirect("teacherhome");
+
+
+    }
+    public function counsellingrej($id){
+        DB::update("UPDATE `bokking` SET `states`='Rejected' WHERE id=?", [$id]);
+
+
+        return redirect("teacherhome");
+
+
+    }
+
     public function  studentprofile()
     {
         $sid = Session::get('$sid');
@@ -511,7 +568,7 @@ class student_course_enroll extends Controller
         $users = DB::select("SELECT * FROM `teacher` WHERE id= '$username' AND password='$pass'");
 
         foreach ($users as $user) {
-            echo $user->name;
+
             Session::put('$tid', $user->id);
             Session::put('$tname', $user->name);
             Session::put('$timage', $user->image);
@@ -630,12 +687,12 @@ class student_course_enroll extends Controller
 
         $data = DB::select("SELECT * FROM `ta` WHERE tid='$tid'");
         $data2 = DB::select("SELECT * FROM `graderpyment` WHERE tid='$tid'");
-        return view('teacher_request')->with(['data' => $data,'data2' => $data2]);
+        return view('teacher_request')->with(['data' => $data, 'data2' => $data2]);
     }
     public function uarej($id)
     {
 
-         DB::UPDATE("UPDATE `ta` SET `status`='Reject' WHERE id='$id'");
+        DB::UPDATE("UPDATE `ta` SET `status`='Reject' WHERE id='$id'");
         return redirect('teacher_request');
     }
     public function uaasp($id)
@@ -852,7 +909,7 @@ United International University<br>
 
 
 
-        return view('p_details')->with(['data' => $data, 'data1' => $data1, 'data2' => $data2, 'data3' => $data3 ,'data4' => $data4]);
+        return view('p_details')->with(['data' => $data, 'data1' => $data1, 'data2' => $data2, 'data3' => $data3, 'data4' => $data4]);
     }
     public function p_rating($id)
     {
@@ -945,7 +1002,8 @@ United International University<br>
         $data4 = DB::select("SELECT * FROM `project` WHERE sid='$sid'");
         return view('myproject', ['data4' => $data4]);
     }
-    public function grader_payment_form(){
+    public function grader_payment_form()
+    {
         $sid = Session::get('$sid');
 
 
@@ -953,21 +1011,22 @@ United International University<br>
         return response()->json(['data5' => $data5]);
         // return view('grader_payment_form', ['data4' => $data4,'data5' => $data5]);
     }
-    public function grader_payment_formone(Request $req){
+    public function grader_payment_formone(Request $req)
+    {
         $sid = Session::get('$sid');
 
-        $name=$req->name;
-        $cid=$req->cid;
-        $as1=$req->as1;
-        $as2=$req->as2;
-        $as3=$req->as3;
-        $as4=$req->as4;
-        $sec=$req->sec;
-        $tid=$req->tid;
+        $name = $req->name;
+        $cid = $req->cid;
+        $as1 = $req->as1;
+        $as2 = $req->as2;
+        $as3 = $req->as3;
+        $as4 = $req->as4;
+        $sec = $req->sec;
+        $tid = $req->tid;
 
 
 
-        $data = array('sid' => $sid, "sname" => $name, "as1" => "$as1", "as2" => $as2, "as3" => $as3, "as4" => "$as4" ,"section" => "$sec","cid"=>$cid,"status"=>"Pending","tid"=>$tid);
+        $data = array('sid' => $sid, "sname" => $name, "as1" => "$as1", "as2" => $as2, "as3" => $as3, "as4" => "$as4", "section" => "$sec", "cid" => $cid, "status" => "Pending", "tid" => $tid);
         DB::table('graderpyment')->insert($data);
 
 
@@ -977,24 +1036,26 @@ United International University<br>
 
         return redirect("grader_payment_form_show");
     }
-    public function grader_payment_form_show(){
+    public function grader_payment_form_show()
+    {
         $data4 = DB::select("SELECT DISTINCT(cid),cname FROM `course` WHERE credit='3' ");
         $data5 = DB::select(" SELECT * FROM `teacher`");
-        return view('grader_payment_form_show', ['data4' => $data4,'data5'=>$data5]);
-
+        return view('grader_payment_form_show', ['data4' => $data4, 'data5' => $data5]);
     }
-    public function deleteuser($id){
+    public function deleteuser($id)
+    {
 
- DB::delete('DELETE FROM `graderpyment` where id = ?', [$id]);
+        DB::delete('DELETE FROM `graderpyment` where id = ?', [$id]);
 
         return redirect("grader_payment_form_show");
-
     }
-    public function projectshowedit(){
+    public function projectshowedit()
+    {
 
-return view('projectshowedit');
+        return view('projectshowedit');
     }
-    public function teacherprofile(){
+    public function teacherprofile()
+    {
         $tid = Session::get('$tid');
 
         $data = DB::select("SELECT * FROM `teacher` where id='$tid'");
@@ -1009,21 +1070,19 @@ return view('projectshowedit');
 
 
         return view('teacherprofile')->with(['data' => $data, 'data1' => $data1, 'data2' => $data2, 'data3' => $data3]);
-
-
-
     }
 
-    public function teacherprofilefrom(Request $request){
+    public function teacherprofilefrom(Request $request)
+    {
         $tid = Session::get('$tid');
 
 
 
         $tname = Session::get('$tname');
 
-        $day=$request->day;
-        $start=$request->start;
-        $end=$request->end;
+        $day = $request->day;
+        $start = $request->start;
+        $end = $request->end;
 
         $data20 = array('tid' => $tid, "tname" => $tname, "day" => $day, "start" => $start, "end" => $end);
         DB::table('time_schedule')->insert($data20);
@@ -1037,20 +1096,18 @@ return view('projectshowedit');
 
 
         return view('teacherprofile')->with(['data' => $data, 'data1' => $data1, 'data2' => $data2, 'data3' => $data3]);
-
-
-
     }
-    public function timage(Request $request){
+    public function timage(Request $request)
+    {
         $tid = Session::get('$tid');
         $request->image;
 
 
 
-    // Move the uploaded image to the storage location
-    $image =  $request->image;;
-    $imageName = $image->getClientOriginalName();
-    $image->move(public_path('images'), $imageName);
+        // Move the uploaded image to the storage location
+        $image =  $request->image;;
+        $imageName = $image->getClientOriginalName();
+        $image->move(public_path('images'), $imageName);
 
 
 
@@ -1075,9 +1132,5 @@ return view('projectshowedit');
 
 
         return view('teacherprofile')->with(['data' => $data, 'data1' => $data1, 'data2' => $data2, 'data3' => $data3]);
-
-
-
     }
-
 }
